@@ -1,17 +1,23 @@
 <template>
   <div class="row">
       <div class="col-md-12">
-          <Brand title="Guilherme Augusto" subtitle="Fotografia"/>
+          <Brand title="App Name" subtitle="Fotografia"/>
           <CardContainer :hasImage="true">
             <ImagePlaceHolder slot="image"
-             height="200rem"
-            />
+             height="200rem" />
             <div slot="content">
-                Olá, que bacana!!!!
-                Olá, que bacana!!!!
-                Olá, que bacana!!!!
-                Olá, que bacana!!!!
-                Olá, que bacana!!!!
+                <h1>
+                Teste teste teste 
+                Teste teste teste 
+                Teste teste teste 
+                Teste teste teste 
+                Teste teste teste 
+                Teste teste teste 
+                Teste teste teste 
+                Teste teste teste 
+                Teste teste teste 
+                Teste teste teste 
+                </h1>
             </div>
           </CardContainer>
 
