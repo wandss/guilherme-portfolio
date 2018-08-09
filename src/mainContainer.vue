@@ -2,18 +2,18 @@
   <div class="row">
       <div class="col-md-12">
           <Brand title="Guilherme Augusto" subtitle="Fotografia"/>
-          <div class="row">
-              <Card size="8" :hasImage="true">
-              <div slot='image'>
-                    ADD IMAGE HERE
-                    ADD IMAGE HERE
-                </div>
-                <h4>
-                Olá que bacana você por aqui......
-                Olá que bacana você por aqui......
-                </h4>
-              </Card>
-          </div>
+          <CardContainer :hasImage="true">
+            <ImagePlaceHolder slot="image"
+             height="200rem"
+            />
+            <div slot="content">
+                Olá, que bacana!!!!
+                Olá, que bacana!!!!
+                Olá, que bacana!!!!
+                Olá, que bacana!!!!
+                Olá, que bacana!!!!
+            </div>
+          </CardContainer>
 
       </div>
   </div>
@@ -21,11 +21,14 @@
 
 <script>
     import Brand from './components/Brand';
+    import CardContainer from './components/CardContainer';
     import Card from './components/Card';
+    import ImagePlaceHolder from './components/ImagePlaceHolder';
+
     export default {
         name: 'MainContainer',
         components:{
-            Brand, Card
+            Brand, CardContainer, Card, ImagePlaceHolder
         },
     }
 </script>

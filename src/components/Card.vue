@@ -1,11 +1,6 @@
 <template>
-    <div :class="'col-md-'+size" id="card">
-        <span class="col-md-4" v-if="hasImage" id="img">
-            <slot name="image"></slot>
-        </span>
-        <div class="col-md-8" id="text">
-            <slot></slot>
-        </div>
+        <div id="card">
+        <slot></slot>
     </div>
 </template>
 
