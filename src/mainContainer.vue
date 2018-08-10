@@ -4,19 +4,19 @@
           <Brand title="App Name" subtitle="Fotografia"/>
           <CardContainer :hasImage="true">
             <ImagePlaceHolder slot="image"
-             height="200rem" />
+             height="225rem" />
             <div slot="content">
                 <h1>
-                Teste teste teste 
-                Teste teste teste 
-                Teste teste teste 
-                Teste teste teste 
-                Teste teste teste 
-                Teste teste teste 
-                Teste teste teste 
-                Teste teste teste 
-                Teste teste teste 
-                Teste teste teste 
+                Teste teste teste
+                Teste teste teste
+                Teste teste teste
+                Teste teste teste
+                Teste teste teste
+                Teste teste teste
+                Teste teste teste
+                Teste teste teste
+                Teste teste teste
+                Teste teste teste
                 </h1>
             </div>
           </CardContainer>
