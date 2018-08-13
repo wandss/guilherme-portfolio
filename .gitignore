@@ -19,3 +19,12 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Python Files
+*.pyc
+*__init__.py
+__pycache__/
+migrations/
+
+#SqlLite 3
+*.sqlite3
