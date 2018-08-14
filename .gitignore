@@ -25,6 +25,7 @@ yarn-error.log*
 *__init__.py
 __pycache__/
 migrations/
+media/
 
 #SqlLite 3
 *.sqlite3
