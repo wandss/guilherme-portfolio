@@ -1,12 +1,9 @@
 <template>
-    <div id="card" class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div id="image" v-if="hasImage">
+            <div class="col-md-8">
+                <div v-if="hasImage">
                     <slot name="image"></slot>
-                </div>
-                <div>
-                    <slot name="content"></slot>
                 </div>
             </div>
         </div>

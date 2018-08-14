@@ -4,8 +4,10 @@
           <Brand title="App Name" subtitle="Fotografia"/>
           <div class="row">
               <ImagePlaceHolder v-for="album in albums" :key="album.uuid"
-               width="395" height="287"
-               :src="album.thumbnail"
+               width="280" height="200"
+               :src="album.thumbnail_data.src"
+               :description="album.description"
+               @click="albumDetail(album.uuid)"            
               />
           </div>
       </div>
@@ -34,12 +36,17 @@
         created(){
             this.$http.get(this.imageUrl)
                 .then(resp=>{
-                    console.log(resp.data)
                     this.albums = resp.data;
                 })
                 .catch(error=>console.log(error.response))
 
         },
+        methods:{
+            albumDetail(album){
+                /*render a new component with image_data*/
+                console.log(album)
+            }
+        }
     }
 </script>
 

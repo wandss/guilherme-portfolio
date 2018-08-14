@@ -32,7 +32,7 @@
 <style scoped>
 h1{
     color:#BCBFBF;
-    text-shadow:10px 15px 8px #111;
+    text-shadow:10px 15px 8px black;
     cursor:default;
     font-family:arial, sans-serif;
     /*TODO

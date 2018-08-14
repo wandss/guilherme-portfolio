@@ -9,7 +9,7 @@ class Image(models.Model):
             height_field='height')
 
     def __str__(self):
-        return self.image.name
+        return str(self.image)
 
 
 class PhotoAlbum(models.Model):
@@ -17,9 +17,10 @@ class PhotoAlbum(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200, null=True, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
+    published = models.BooleanField(default=False)
     thumbnail = models.OneToOneField(Image, on_delete=models.DO_NOTHING,
-            related_name='cover_image')
-    images = models.ManyToManyField(Image)
+            related_name='thumbnail')
+    images = models.ManyToManyField(Image, related_name='photo_album')
 
     def __str__(self):
         return self.name
