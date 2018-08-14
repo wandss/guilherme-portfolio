@@ -15,10 +15,6 @@ export default {
     },
 }
 
-/*
-https://api.instragram.com/oauth/authorize/?client_id=CLIENT_ID&redirect_uri=https://www.google.com&response_type=token
-https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=ACCESS_TOKEN
-*/
 </script>
 
 <style>

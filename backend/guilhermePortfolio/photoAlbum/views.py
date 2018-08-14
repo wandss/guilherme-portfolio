@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.generics import (ListAPIView, CreateAPIView,
         ListCreateAPIView)
 from .models import PhotoAlbum, Image
-from .serializers import PhotoAlbumSerializer, ImageSerialiazer
+from .serializers import PhotoAlbumSerializer, ImageSerializer
 
 class PhotoAlbumListAPIView(ListAPIView):
     serializer_class = PhotoAlbumSerializer
@@ -13,6 +13,6 @@ class PhotoAlbumCreateAPIView(CreateAPIView):
     queryset = PhotoAlbum.objects.all()
 
 class ImageCreateAPIView(ListCreateAPIView):
-    serializer_class = ImageSerialiazer
+    serializer_class = ImageSerializer
     queryset = Image.objects.all()
 

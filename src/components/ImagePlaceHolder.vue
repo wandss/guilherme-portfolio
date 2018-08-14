@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <img :alt="alt" src="../assets/image/sampleImage.jpg"
-         :width="width" :height="height"
-        />
-    </div>
+    <img :alt="alt" :src="src"
+     :width="width" :height="height"
+    />
 </template>
 <script>
     export default{
@@ -18,12 +16,7 @@
             },
             src:{
                 type:String,
-                default:"../assets/image/sampleImage.jpg",
             },
-            test:{
-                type:String,
-                default:"https://scontent.cdninstagram.com/vp/7307755bc47096c0029c9165e489998b/5C0FC331/t51.2885-19/s150x150/28752690_2067402746853687_3089063405542178816_n.jpg"
-            }
         }
     }
 </script>

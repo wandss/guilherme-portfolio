@@ -21,7 +21,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/album/', include('photoAlbum.urls', namespace='photoalbum'))
+    path('api/v1/albums/', include('photoAlbum.urls', namespace='photoalbum'))
 ]
 
 if settings.DEBUG:
