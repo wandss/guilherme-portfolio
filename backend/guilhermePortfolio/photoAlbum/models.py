@@ -14,10 +14,11 @@ class Image(models.Model):
 
 class PhotoAlbum(models.Model):
     uuid = models.UUIDField(default=uuid4, editable=False)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     description = models.CharField(max_length=200, null=True, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
     published = models.BooleanField(default=False)
+    public = models.BooleanField(default=False)
     thumbnail = models.OneToOneField(Image, on_delete=models.DO_NOTHING,
             related_name='thumbnail')
     images = models.ManyToManyField(Image, related_name='photo_album')

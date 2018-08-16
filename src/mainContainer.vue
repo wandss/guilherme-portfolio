@@ -23,12 +23,12 @@
     export default {
         name: 'MainContainer',
         components:{
-            Brand, CardContainer, Card, ImagePlaceHolder
+            Brand, CardContainer, Card, ImagePlaceHolder,
         },
         data(){
             return{
                 profilePicture:"",
-                imageUrl:'/api/v1/albums/',
+                imageUrl:'/api/v1/albums/public/?q=True',
                 selfData:"/users/self",
                 albums:[],
             }
