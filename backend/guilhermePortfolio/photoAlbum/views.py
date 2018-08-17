@@ -44,12 +44,12 @@ class ImageCreateAPIView(ListCreateAPIView):
 
 
 """
-TODO: 
-    In 'PrivatePhotoAlbum': Create a permission class to only list Albums 
+TODO:
+    In 'PrivatePhotoAlbum': Create a permission class to only list Albums
     which users are allowed to acces, based on group permission
     The group to be created will have the album ID as it's name.
     Overrides get_queryset method, get the logged user,
-    and checks if it is related to the group. 
+    and checks if it is related to the group.
     Group Name: "Album-{name}"
     OPT2:
         Filter the queryset: Get user groups.
