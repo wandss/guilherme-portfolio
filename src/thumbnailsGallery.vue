@@ -4,7 +4,7 @@
        width="280" height="200"
        :src="album.thumbnail_data.src"
        :description="album.description"
-       @click="$emit('albumDetail', album.uuid)"
+       @click="albumDetail(album.uuid)"
       />
     </div>
 </template>
@@ -16,6 +16,14 @@ export default{
             required:true,
         }
     },
+    methods:{
+        albumDetail(uuid){
+            this.$router.push({
+                name:'album',
+                query:{uuid:uuid}
+            })
+        }
+    }
 }
 </script>
 <style>

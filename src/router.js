@@ -6,10 +6,18 @@ import PhotoGallery from './photoGallery.vue';
 Vue.use(Router);
 
 export default new Router({
-  routes:[
-    {path:'/',
-      name:'thumbnails',
-      component:ThumbnailsGallery,
-    }
-  ]
+    mode:'history',
+    routes:[
+        {
+            path:'/',
+            name:'albums',
+            component:ThumbnailsGallery,
+        },
+        {
+            path:'/album',
+            name:'album',
+            component:PhotoGallery,
+            props:true,
+        }
+    ]
 })

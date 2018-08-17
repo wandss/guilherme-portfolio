@@ -1,18 +1,40 @@
 <template>
     <div>
-        Loading Photos....
+        <div class="row">
+            <img id="photoGallery" v-for="(image, index) in album" :key="index"
+             width="280" height="200"
+             :src="image.src"
+            />
+        </div>
+            <button class="btn btn-primary"
+             @click="$router.push('/')">Voltar
+            </button>
     </div>
 </template>
 <script>
 export default{
     name:'PhotoGallery',
     props:{
-        album:{
+        albums:{
             type:Array,
             required:true,
+        }
+    },
+    computed:{
+        album(){
+            const uuid = this.$route.query.uuid
+            const images = this.albums.find((images)=>
+                images.uuid===uuid).image_data
+            return images
+
         }
     }
 }
 </script>
-<style>
+<style scoped>
+#photoGallery{
+    margin:0;
+    margin-left:-1px;
+}
+
 </style>

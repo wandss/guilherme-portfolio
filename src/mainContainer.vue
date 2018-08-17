@@ -3,8 +3,7 @@
       <div class="col-md-12">
           <Brand title="App Name" subtitle="Fotografia"/>
           <div class="row">
-              <ThumbnailsGallery :albums="albums"
-               @albumDetail="albumDetail"/>
+              <router-view :albums="albums"/>
           </div>
       </div>
   </div>
@@ -23,7 +22,6 @@
             return{
                 profilePicture:"",
                 imageUrl:'/api/v1/albums/public/?q=True',
-                selfData:"/users/self",
                 albums:[],
                 photoGallery:[],
             }
@@ -36,14 +34,6 @@
                 .catch(error=>console.log(error.response))
 
         },
-        methods:{
-            albumDetail(uuid){
-                /*render a new component with image_data*/
-                this.photoGallery = this.albums.filter((album=>
-                    album.uuid===uuid
-                ))
-            }
-        }
     }
 </script>
 
