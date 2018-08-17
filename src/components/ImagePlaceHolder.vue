@@ -2,7 +2,7 @@
     <div id="image" class="col-sm-4">
         <img :alt="alt" :src="src"
          :width="width" :height="height"
-         @click="$emit('click')"           
+         @click="$emit('click')"
         />
         <h3 id="description">
             {{description}}
