@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.db.models import Q
 from rest_framework.generics import (ListAPIView, CreateAPIView,
-        ListCreateAPIView)
+                                     ListCreateAPIView, RetrieveAPIView)
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import PhotoAlbum, Image
 from .serializers import PhotoAlbumSerializer, ImageSerializer
+
 
 class PublicPhotoAlbumListAPIView(ListAPIView):
     """Returns all Public Photo Albums objects."""
@@ -30,7 +31,30 @@ class PublicPhotoAlbumListAPIView(ListAPIView):
 class PrivatePhotoAlbumListAPIView(ListAPIView):
     """Returns all Private Albums objects."""
     serializer_class = PhotoAlbumSerializer
-    queryset = PhotoAlbum.objects.filter(public=True)
+
+    def get_queryset(self):
+        queryset = PhotoAlbum.objects.filter(public=False)
+        query = self.request.GET.get('q')
+
+        if query:
+
+            queryset = queryset.filter(
+                Q(published=query)
+            )
+
+        return queryset            
+
+
+class PhotoAlbumRetrieve(RetrieveAPIView):
+    """Retrives photo Albums based on user's group"""
+    #TODO: Ovverride 'get' method to check whether
+    #user can access the album.
+
+    queryset = PhotoAlbum.objects.all()
+    serializer_class = PhotoAlbumSerializer
+    lookup_field = 'uuid'
+
+
 
 
 class PhotoAlbumCreateAPIView(CreateAPIView):
