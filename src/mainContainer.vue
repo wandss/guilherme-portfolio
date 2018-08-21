@@ -12,13 +12,10 @@
 
 <script>
     import Brand from './components/Brand';
-    import CardContainer from './components/CardContainer';
-    import Card from './components/Card';
 
     export default {
         name: 'MainContainer',
-        components:{
-            Brand, CardContainer, Card},
+        components:{Brand,},
         data(){
             return{
                 profilePicture:"",

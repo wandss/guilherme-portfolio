@@ -6,12 +6,14 @@ import ImagePlaceHolder from './components/ImagePlaceHolder.vue'
 import ThumbnailsGallery from './thumbnailsGallery'
 import PhotoGallery from './photoGallery'
 import NavBar from './navBar'
+import Overlay from './components/Overlay'
 
 Vue.config.productionTip = false
 Vue.component('ImagePlaceHolder', ImagePlaceHolder);
 Vue.component('ThumbnailsGallery', ThumbnailsGallery);
 Vue.component('PhotoGallery', PhotoGallery);
 Vue.component('NavBar', NavBar);
+Vue.component('Overlay', Overlay);
 
 Vue.prototype.$http = axios;
 
