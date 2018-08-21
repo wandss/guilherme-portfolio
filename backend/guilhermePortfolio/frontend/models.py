@@ -9,4 +9,14 @@ class NavbarItem(models.Model):
     def __str__(self):
         return self.name
 
+class Brand(models.Model):
+    uuid = models.UUIDField(default=uuid4, editable=False)
+    title = models.CharField(max_length=30, unique=True)
+    subtitle = models.CharField(max_length=30, unique=True)
+
+
+    def __str__(self):
+        return self.title
+
+
 

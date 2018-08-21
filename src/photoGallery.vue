@@ -1,14 +1,16 @@
 <template>
     <div>
         <div class="row">
-            <img id="photoGallery" v-for="(image, index) in album" :key="index"
-             width="280" height="200"
-             :src="image.src"
-            />
+            <div class="text-center">
+                <img id="photoGallery" v-for="(image, index) in album" :key="index"
+                 width="280" height="200"
+                 :src="image.src"
+                />
+            </div>
         </div>
-            <button class="btn btn-primary"
-             @click="$router.push('/')">Voltar
-            </button>
+        <button class="btn btn-primary"
+         @click="$router.push('/')">Voltar
+        </button>
     </div>
 </template>
 <script>
@@ -34,7 +36,7 @@ export default{
 <style scoped>
 #photoGallery{
     margin:0;
-    margin-left:-1px;
+    text-align:center;
 }
 
 </style>
