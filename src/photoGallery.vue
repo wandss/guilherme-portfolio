@@ -1,6 +1,6 @@
 <template>
     <div>
-        <image-viewer :showImage="viewImage" />
+        <image-viewer :showImage="viewImage" @click="viewImage=!viewImage"/>
         <div class="row">
             <div class="text-center">
                 <img id="photoGallery" v-for="(image, index) in album" :key="index"
@@ -43,8 +43,7 @@ export default{
         imageDetail(index){
             console.log(index)
             this.viewImage = !this.viewImage
-        }
-
+        },
     }
 }
 </script>
