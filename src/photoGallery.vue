@@ -1,6 +1,10 @@
 <template>
     <div>
-        <image-viewer :showImage="viewImage" @click="viewImage=!viewImage"/>
+        <image-viewer :showImage="viewImage" @click="viewImage=!viewImage"
+        v-if="image!==null" :imageCount="imageCount" :image="image"
+        :index="currentImageIndex" @nextImage="imageDetail"
+        @prevImage="imageDetail"
+        />
         <div class="row">
             <div class="text-center">
                 <img id="photoGallery" v-for="(image, index) in album" :key="index"
@@ -28,7 +32,8 @@ export default{
     data(){
         return{
             viewImage:false,
-            fullScreenImageIndex:undefined,
+            image:null,
+            currentImageIndex:0,
         }
     },
     computed:{
@@ -37,11 +42,15 @@ export default{
             const images = this.albums.find((images)=>
                 images.uuid===uuid).image_data
             return images
+        },
+        imageCount(){
+            return this.album.length;
         }
     },
     methods:{
         imageDetail(index){
-            console.log(index)
+            this.image = this.album[index]
+            this.currentImageIndex = index
             this.viewImage = !this.viewImage
         },
     }
@@ -51,6 +60,9 @@ export default{
 #photoGallery{
     margin:0;
     text-align:center;
+}
+img{
+    cursor:pointer;
 }
 
 </style>

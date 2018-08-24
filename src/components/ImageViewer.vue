@@ -1,10 +1,21 @@
 <template>
     <Overlay :show="showImage">
-        <div id="close"  @click="$emit('click')">
-            &times
-        </div>
-        <div id="image">
-            <img src='/media/uploads/Lighthouse.jpg' />
+        <span @click="$emit('click')" class="closebtn">
+            &times;
+        </span>
+        <div>
+            <div class="image">
+                <div class="imageCounter">{{index+1}}/{{imageCount}}</div>
+                <img :src="image.src" />
+            </div>
+            <div class="prev" v-if="index > 0"
+             @click="prev">
+                &#10094;
+            </div>
+            <div class="next" v-if="index !== imageCount-1"
+             @click="next">
+                &#10095;
+            </div>
         </div>
 
     </Overlay>
@@ -17,37 +28,87 @@ export default{
         showImage:{
             type:Boolean,
             default:false,
+        },
+        image:{
+            type:Object,
+        },
+        imageCount:{
+            type:Number,
+        },
+        index:{
+            type:Number,
         }
     },
+    methods:{
+        next(){
+            if(this.index !== this.imageCount -1){
+                this.$emit('click')
+                this.$emit('nextImage', this.index+1)
+            }
+        },
+        prev(){
+            if(this.index > 0){
+                this.$emit('click')
+                this.$emit('prevImage', this.index-1)
+
+            }
+        }
+    }
 }
 </script>
 <style scoped>
-img{
-    max-width:100vw;
-    max-height:100vh;
-}
-#close{
-    float:right;
-    margin-right:2rem;
-    font-size:4rem;
-    cursor:pointer;
-    text-shadow:1px 4px 2px #333;
-    color:#9A9A9A;
-}
-#close:hover{
-    color:#EFEFEF;
-    text-shadow:1px 4px 20px #555;
-    transition: all .3s ease-in;
-}
-#image{
-    padding:2rem 2rem 2rem 2rem;
-    text-align:center;
-}
-#next{
-    float:right;
-}
-#prev{
-    float:left;
-}
 
+.closebtn{
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    cursor:pointer;
+}
+.content{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    max-width: 1200px;
+}
+.imageCounter{
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+img{
+    width:90vw;
+    height:50%;
+    margin-left:5vw;
+    overflow:scroll;
+}
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.next{
+    right:0;
+}
+.prev:hover,
+.next:hover {
+    font-size:4rem;
+}
 </style>
