@@ -59,13 +59,18 @@ export default{
 <style scoped>
 
 .closebtn{
-    color: white;
+    color: rgba(100, 100, 100, .5);
     position: absolute;
     top: 10px;
     right: 25px;
     font-size: 35px;
     font-weight: bold;
     cursor:pointer;
+    text-shadow:2px 3px 4px #111;
+}
+.closebtn:hover{
+    color: rgba(199, 199, 199, 1);
+    transition:all .3s ease-in;
 }
 .content{
     position: relative;
@@ -77,15 +82,14 @@ export default{
 }
 .imageCounter{
     color: #f2f2f2;
-    font-size: 12px;
+    font-size: 2rem;
     padding: 8px 12px;
     position: absolute;
     top: 0;
 }
 img{
-    width:90vw;
-    height:50%;
-    margin-left:5vw;
+    width:65vw;
+    margin-left:20vw;
     overflow:scroll;
 }
 .prev,
