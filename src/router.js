@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import ThumbnailsGallery from  './thumbnailsGallery.vue';
-import PhotoGallery from './photoGallery.vue';
-import clientArea from './clientArea.vue';
+import Home from  '@/pages/home.vue';
+import Album from '@/pages/album.vue';
+import clientArea from '@/pages/clientArea.vue';
 
 Vue.use(Router);
 
@@ -11,13 +11,13 @@ export default new Router({
     routes:[
         {
             path:'/',
-            name:'albums',
-            component:ThumbnailsGallery,
+            name:'home',
+            component:Home,
         },
         {
-            path:'/album',
+            path:'/album/:albumId',
             name:'album',
-            component:PhotoGallery,
+            component:Album,
             props:true,
         },
         {

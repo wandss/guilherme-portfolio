@@ -21,7 +21,6 @@
     </Overlay>
 </template>
 <script>
-import Overlay from './Overlay.vue';
 export default{
     name:'ImageViewer',
     props:{

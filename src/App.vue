@@ -1,19 +1,38 @@
 <template>
   <div class="container">
       <NavBar />
-      <MainContainer />
-
+      <div class="row">
+          <div class="col-md-12">
+              <Brand v-for="info in brandInfo" :key="info.title"
+               :title="info.title" :subtitle="info.subtitle"/>
+              <div class="row">
+                  <router-view />
+              </div>
+          </div>
+      </div>
   </div>
 </template>
 
 <script>
-import MainContainer from './mainContainer'
-
+import Brand from '@/components/Brand';
 export default {
     name: 'app',
-    components: {
-        MainContainer
+    components:{Brand},
+    data(){
+        return {
+            brandInfo:{}
+        }
     },
+    methods:{
+        getBrandInfo(){
+            this.$http.get(this.$resources.baseUrl
+                +this.$resources.brand)
+                .then(resp=>this.brandInfo=resp.data)
+        }
+    },
+    mounted(){
+        this.getBrandInfo();
+    }
 }
 
 </script>

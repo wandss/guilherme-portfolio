@@ -50,11 +50,10 @@ class PhotoAlbumRetrieve(RetrieveAPIView):
     #TODO: Ovverride 'get' method to check whether
     #user can access the album.
 
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = PhotoAlbum.objects.all()
     serializer_class = PhotoAlbumSerializer
     lookup_field = 'uuid'
-
-
 
 
 class PhotoAlbumCreateAPIView(CreateAPIView):

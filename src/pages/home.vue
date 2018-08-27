@@ -11,22 +11,29 @@
     </div>
 </template>
 <script>
-import Card from '@/components/Card'
 export default{
-    name:'ThumbnailsGallery',
-    components:{Card,},
-    props:{
-        albums:{type:Array,
-            required:true,
+    name:'home',
+    data(){
+        return{
+            albums:[],
         }
     },
     methods:{
+        getAlbums(){
+            const url = this.$resources.baseUrl+
+                this.$resources.publicAlbums
+            this.$http.get(url)
+                .then(resp=>{
+                    this.albums=resp.data
+                })
+                .catch(error=>console.log(error.response))
+        },
         albumDetail(uuid){
-            this.$router.push({
-                name:'album',
-                query:{uuid:uuid}
-            })
+            this.$router.push('/album'+uuid)
         }
+    },
+    mounted(){
+        this.getAlbums();
     }
 }
 </script>

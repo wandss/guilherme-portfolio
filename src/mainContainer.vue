@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import Brand from './components/Brand';
+    import Brand from '@/components/Brand';
 
     export default {
         name: 'MainContainer',

@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{album}}
         <image-viewer :showImage="viewImage" @click="viewImage=!viewImage"
         v-if="image!==null" :imageCount="imageCount" :image="image"
         :index="currentImageIndex" @nextImage="imageDetail"
@@ -19,14 +20,11 @@
     </div>
 </template>
 <script>
-import ImageViewer from './components/ImageViewer';
 export default{
     name:'PhotoGallery',
-    components:{ImageViewer},
     props:{
-        albums:{
-            type:Array,
-            required:true,
+        albumId:{
+            type:String
         }
     },
     data(){
@@ -38,6 +36,8 @@ export default{
     },
     computed:{
         album(){
+            console.log('OKOKOKOK')
+            console.log(this.albumId)
             const uuid = this.$route.query.uuid
             const images = this.albums.find((images)=>
                 images.uuid===uuid).image_data
