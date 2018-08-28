@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{album}}
         <image-viewer :showImage="viewImage" @click="viewImage=!viewImage"
         v-if="image!==null" :imageCount="imageCount" :image="image"
         :index="currentImageIndex" @nextImage="imageDetail"
@@ -32,20 +31,11 @@ export default{
             viewImage:false,
             image:null,
             currentImageIndex:0,
+            album:[],
         }
     },
-    computed:{
-        album(){
-            console.log('OKOKOKOK')
-            console.log(this.albumId)
-            const uuid = this.$route.query.uuid
-            const images = this.albums.find((images)=>
-                images.uuid===uuid).image_data
-            return images
-        },
-        imageCount(){
-            return this.album.length;
-        }
+    mounted(){
+        this.getAlbum();
     },
     methods:{
         imageDetail(index){
@@ -53,6 +43,18 @@ export default{
             this.currentImageIndex = index
             this.viewImage = !this.viewImage
         },
+        getAlbum(){
+            this.$http.get(this.$resources.album+'/'+this.albumId)
+                .then(resp=>{
+                    this.album=resp.data.image_data
+                })
+                .catch(error=>console.log(error.response))
+        }
+    },
+    computed:{
+        imageCount(){
+            return this.album.length
+        }
     }
 }
 </script>

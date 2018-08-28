@@ -25,8 +25,7 @@ export default {
     },
     methods:{
         getBrandInfo(){
-            this.$http.get(this.$resources.baseUrl
-                +this.$resources.brand)
+            this.$http.get(this.$resources.brand)
                 .then(resp=>this.brandInfo=resp.data)
         }
     },

@@ -1,6 +1,8 @@
+const baseUrl = '/api/v1';
 export default{
-    baseUrl:'/api/v1',
-    publicAlbums:'/albums/public/?q=True',
-    privateAlbums:'/albums/public/q=False',
-    brand:'/frontend/brand',
+    base:baseUrl,
+    album:baseUrl+'/albums',
+    publicAlbums:baseUrl+'/albums/public/?q=True',
+    privateAlbums:baseUrl+'/albums/public/q=False',
+    brand:baseUrl+'/frontend/brand',
 }

@@ -20,9 +20,7 @@ export default{
     },
     methods:{
         getAlbums(){
-            const url = this.$resources.baseUrl+
-                this.$resources.publicAlbums
-            this.$http.get(url)
+            this.$http.get(this.$resources.publicAlbums)
                 .then(resp=>{
                     this.albums=resp.data
                 })

@@ -15,7 +15,7 @@ export default new Router({
             component:Home,
         },
         {
-            path:'/album/:albumId',
+            path:'/album:albumId',
             name:'album',
             component:Album,
             props:true,
