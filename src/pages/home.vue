@@ -4,7 +4,7 @@
             <img :src="album.thumbnail_data.src" slot="img"
              width="280" height="200"
             />
-            <div slot="desc">
+            <div slot="desc" id="description">
                 <h4>{{album.description}}</h4>
             </div>
         </Card>
@@ -36,4 +36,8 @@ export default{
 }
 </script>
 <style>
+#description{
+    font-family:permanent-marker, sans-serif;
+    color:rgba(45, 101, 255, 1);
+}
 </style>

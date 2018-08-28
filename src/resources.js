@@ -3,6 +3,6 @@ export default{
     base:baseUrl,
     album:baseUrl+'/albums',
     publicAlbums:baseUrl+'/albums/public/?q=True',
-    privateAlbums:baseUrl+'/albums/public/q=False',
+    privateAlbums:baseUrl+'/albums/private/?q=True',
     brand:baseUrl+'/frontend/brand',
 }

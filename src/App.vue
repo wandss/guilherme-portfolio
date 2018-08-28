@@ -38,6 +38,8 @@ export default {
 
 <style>
 @import './assets/css/bootstrap.min.css';
+@import './assets/css/customFonts.css';
+
 body{
     color:#9A9A9A;
 /*    background:linear-gradient(180deg, rgba(35,35,35,1), rgba(120,120,120,.7));*/
