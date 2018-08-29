@@ -1,13 +1,18 @@
 <template>
-    <div class="row">
-        <Card v-for="album in albums" :key="album.uuid" @click="albumDetail(album.uuid)">
-            <img :src="album.thumbnail_data.src" slot="img"
-             width="280" height="200"
-            />
-            <div slot="desc" id="description">
-                <h5>{{album.description}}</h5>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 center-block">
+                <Card v-for="album in albums" :key="album.uuid"
+                 @click="albumDetail(album.uuid)">
+                    <img :src="album.thumbnail_data.src" slot="img"
+                     width="280" height="200"
+                    />
+                    <div slot="desc" id="description">
+                        <h5>{{album.description}}</h5>
+                    </div>
+                </Card>
             </div>
-        </Card>
+        </div>
     </div>
 </template>
 <script>

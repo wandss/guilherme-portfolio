@@ -1,21 +1,25 @@
 <template>
-    <div>
+    <div class="container-fluid">
         <image-viewer :showImage="viewImage" @click="viewImage=!viewImage"
         v-if="image!==null" :imageCount="imageCount" :image="image"
         :index="currentImageIndex" @nextImage="imageDetail"
         @prevImage="imageDetail"
         />
         <div class="row">
-            <div class="text-center">
-                <img id="photoGallery" v-for="(image, index) in album" :key="index"
-                 width="280" height="200"
-                 :src="image.src" @click="imageDetail(index)"
-                />
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <img id="photoGallery" v-for="(image, index) in album" :key="index"
+                     width="280" height="200"
+                     :src="image.src" @click="imageDetail(index)"
+                    />
+                </div>
             </div>
         </div>
-        <button class="btn btn-primary"
-         @click="$router.push('/')">Voltar
-        </button>
+        <div class="container-fluid" id="btn">
+            <button class="btn btn-primary"
+             @click="$router.push('/')">Voltar
+            </button>
+        </div>
     </div>
 </template>
 <script>
@@ -66,5 +70,7 @@ export default{
 img{
     cursor:pointer;
 }
-
+#btn{
+    margin-top:2rem;
+}
 </style>
