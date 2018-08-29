@@ -5,7 +5,7 @@
              width="280" height="200"
             />
             <div slot="desc" id="description">
-                <h4>{{album.description}}</h4>
+                <h5>{{album.description}}</h5>
             </div>
         </Card>
     </div>

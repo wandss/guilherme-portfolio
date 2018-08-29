@@ -40,6 +40,9 @@
                     this.message = 'É necessário logar para ter acesso à essa área!!!'
                 }
             })
+        },
+        albumDetail(uuid){
+            this.$router.push('/album'+uuid)
         }
     }
  }
