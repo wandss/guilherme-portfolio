@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from  '@/pages/home.vue';
 import Album from '@/pages/album.vue';
 import clientArea from '@/pages/clientArea.vue';
+import contact from '@/pages/contact.vue';
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
             path:'/cliente',
             name:'client',
             component:clientArea,
+        },
+        {
+            path:'/contact',
+            name:'contact',
+            component:contact,
         }
     ]
 })

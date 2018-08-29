@@ -23,9 +23,8 @@ export default{
     },
     methods:{
         getMenu(){
-            this.$http.get('/api/v1/frontend/navbaritems')
+            this.$http.get(this.resources.navbar)
                 .then(resp=>{
-                    console.log(resp.data)
                     this.menuItems = resp.data
                 })
                 .catch(error=>console.log(error))

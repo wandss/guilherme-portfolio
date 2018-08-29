@@ -2,3 +2,7 @@
     font-family:permanent-marker;
     src:url('../fonts/PermanentMarker-Regular.ttf');
 }
+@font-face {
+    font-family:indie-flower;
+    src:url('../fonts/IndieFlower.ttf');
+}

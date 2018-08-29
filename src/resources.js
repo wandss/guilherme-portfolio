@@ -5,4 +5,5 @@ export default{
     publicAlbums:baseUrl+'/albums/public/?q=True',
     privateAlbums:baseUrl+'/albums/private/?q=True',
     brand:baseUrl+'/frontend/brand',
+    navbar:baseUrl+'/frontend/navbaritems',
 }

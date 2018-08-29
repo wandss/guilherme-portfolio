@@ -29,7 +29,7 @@
     },
     methods:{
         getAlbums(){
-            this.$http.get(this.$resources.privateAlbums)
+            this.$http.get(this.resources.privateAlbums)
                 .then(resp=>{
                 this.albums = resp.data;
             })

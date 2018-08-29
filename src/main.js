@@ -17,7 +17,8 @@ Vue.component('Card', Card);
 Vue.component('ImageViewer', ImageViewer);
 
 Vue.prototype.$http = axios;
-Vue.prototype['$resources'] = resources;
+//Vue.prototype['$resources'] = resources;
+Vue.prototype.resources = resources;
 
 new Vue({
   router,
