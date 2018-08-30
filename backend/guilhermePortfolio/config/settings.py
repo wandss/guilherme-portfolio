@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'photoAlbum',
     'frontend',
+    'contact',
 ]
 
 MIDDLEWARE = [
