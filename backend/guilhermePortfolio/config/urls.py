@@ -17,10 +17,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from frontend.views import home
 #from .settings import DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home),
     path('api/v1/albums/', include('photoAlbum.urls', namespace='photoalbum')),
     path('api/v1/frontend/', include('frontend.urls', namespace='frontend')),
     path('api/v1/contact/', include('contact.urls', namespace='contact')),
