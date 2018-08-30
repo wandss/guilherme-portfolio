@@ -4,6 +4,14 @@
             <div class="col-md-12 center-block">
                 <Card v-for="album in albums" :key="album.uuid"
                  @click="albumDetail(album.uuid)">
+                    <div slot="name" id="albumName">
+                        <h4>
+                            {{album.name}}
+                        </h4>
+                        <p>
+                            Junho /2018
+                        </p>
+                    </div>
                     <img :src="album.thumbnail_data.src" slot="img"
                      width="280" height="200"
                     />
@@ -41,6 +49,10 @@ export default{
 }
 </script>
 <style>
+#albumName{
+    font-family:permanent-marker, sans-serif;
+    color:rgba(3, 0, 211, 1);
+}
 #description{
     font-family:permanent-marker, sans-serif;
     color:rgba(45, 101, 255, 1);

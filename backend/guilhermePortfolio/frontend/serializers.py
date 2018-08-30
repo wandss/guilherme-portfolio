@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import NavbarItem, Brand
+from .models import NavbarItem, Brand, PersonalContact
 
 
 class NavbarItemSerializer(ModelSerializer):
@@ -12,3 +12,7 @@ class BrandSerializer(ModelSerializer):
         model = Brand
         fields = ('uuid', 'title', 'subtitle',)
 
+class PersonalContactSerializer(ModelSerializer):
+    class Meta:
+        model = PersonalContact
+        fields = "__all__"

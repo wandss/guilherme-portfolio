@@ -1,6 +1,7 @@
 <template>
     <div class="col-sm-4" @click="$emit('click')" id="container">
         <div id="card" :style="[rotateCard,]">
+            <slot name="name"></slot>
             <slot name="img"></slot>
             <slot name="desc" id="desc"></slot>
         </div>

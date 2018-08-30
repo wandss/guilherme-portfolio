@@ -87,9 +87,12 @@ export default{
     top: 0;
 }
 img{
-    width:65vw;
-    margin-left:20vw;
+    width:100%;
     overflow:scroll;
+    height:auto;
+    top:15vh;
+    position:absolute;
+    margin:auto;
 }
 .prev,
 .next {
