@@ -20,8 +20,7 @@ Vue.component('ImageViewer', ImageViewer);
 Vue.component('AppInput', AppInput);
 Vue.component('AppTextArea', AppTextArea);
 Vue.prototype.$http = axios;
-//Vue.prototype['$resources'] = resources;
-Vue.prototype.resources = resources;
+Vue.prototype.$resource = resources;
 
 new Vue({
   router,

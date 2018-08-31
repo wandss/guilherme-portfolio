@@ -19,11 +19,12 @@ class SendMessageAPIView(APIView):
     def post(self, request):
         print('SENDING E_MAIL')
         print('Aguarde....')
-        send_mail(
-            'Subject',
-            'HELLO MODAFOCA DJANGO',
-            'testingDjangomail@gmail.com',
-            ['wandss@gmail.com'],
-            fail_silently=False,
-        )
+        import pdb;pdb.set_trace()#DEBUG
+        #send_mail(
+        #    'Subject',
+        #    'HELLO MODAFOCA DJANGO',
+        #    'testingDjangomail@gmail.com',
+        #    ['wandss@gmail.com'],
+        #    fail_silently=False,
+        #)
         return Response('OK')

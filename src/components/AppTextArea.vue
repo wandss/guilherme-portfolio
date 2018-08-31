@@ -2,7 +2,8 @@
     <div class="form-group">
         <label>{{label}}</label>
         <textarea class="form-control"
-         :rows="rows"/>
+         :rows="rows" :required="required"
+         @input="$emit('input', $event.target.value)" />
     </div>
 </template>
 <script>
@@ -15,7 +16,11 @@ export default{
         rows:{
             type:Number,
             default:5,
-        }
+        },
+        required:{
+            type:Boolean,
+            default:false,
+        },
     }
 }
 </script>

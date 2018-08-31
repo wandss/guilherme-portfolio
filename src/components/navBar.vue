@@ -23,7 +23,7 @@ export default{
     },
     methods:{
         getMenu(){
-            this.$http.get(this.resources.navbar)
+            this.$http.get(this.$resource.navbar)
                 .then(resp=>{
                     this.menuItems = resp.data
                 })

@@ -48,7 +48,7 @@ export default{
             this.viewImage = !this.viewImage
         },
         getAlbum(){
-            this.$http.get(this.resources.album+'/'+this.albumId)
+            this.$http.get(this.$resource.album+'/'+this.albumId)
                 .then(resp=>{
                     this.album=resp.data.image_data
                 })

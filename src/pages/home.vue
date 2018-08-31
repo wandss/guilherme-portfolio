@@ -33,7 +33,7 @@ export default{
     },
     methods:{
         getAlbums(){
-            this.$http.get(this.resources.publicAlbums)
+            this.$http.get(this.$resource.publicAlbums)
                 .then(resp=>{
                     this.albums=resp.data
                 })

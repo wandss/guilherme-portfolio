@@ -6,5 +6,6 @@ export default{
     privateAlbums:baseUrl+'/albums/private/?q=True',
     brand:baseUrl+'/frontend/brand',
     navbar:baseUrl+'/frontend/navbaritems',
-    contact:baseUrl+'/frontend/personalcontact',
+    contact:baseUrl+'/contact',
+    sendMessage:baseUrl+'/contact/send',
 }

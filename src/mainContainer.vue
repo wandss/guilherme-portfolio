@@ -27,12 +27,12 @@
         },
         methods:{
             getBrandInfo(){
-                this.$http.get(this.resources.brand)
+                this.$http.get(this.$resource.brand)
                     .then(resp=>this.brandInfo=resp.data)
             }
         },
         created(){
-            this.$http.get(this.resources.publicAlbum)
+            this.$http.get(this.$resource.publicAlbum)
                 .then(resp=>{
                     this.albums = resp.data;
                 })
