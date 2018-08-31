@@ -36,14 +36,24 @@ export default{
             message:'',
         }
     },
+    computed:{
+        csrftoken(){
+            return this.$cookies.get('csrftoken')
+        }
+    },
     methods:{
         sendMessage(){
             console.log("sending Message......")
+            const headers = {'X-CSRFToken':this.csrftoken,
+                'Content-Type':'application/json',
+            };
             const data = {name:this.name, email:this.email,
                 subject:this.subject, message:this.message}
-            this.$http.post(this.$resource.sendMessage)
+
+            this.$http.post(this.$resource.sendMessage,data,
+                {headers:headers})
                 .then(resp=>console.log(resp.data))
-                .catch(error=console.log(error.response))
+                .catch(error=>console.log(error.response))
         }
     }
 }

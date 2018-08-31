@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container-fluid">
         <h3 v-if='message !== undefined'>
             {{message}}
         </h3>
