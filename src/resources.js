@@ -8,4 +8,6 @@ export default{
     navbar:baseUrl+'/frontend/navbaritems',
     contact:baseUrl+'/contact',
     sendMessage:baseUrl+'/contact/send',
+    login:baseUrl+'/frontend/login/',
+    logout:baseUrl+'/frontend/logout/',
 }

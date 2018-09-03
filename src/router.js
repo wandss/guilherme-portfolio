@@ -4,6 +4,7 @@ import Home from  '@/pages/home.vue';
 import Album from '@/pages/album.vue';
 import clientArea from '@/pages/clientArea.vue';
 import contact from '@/pages/contact.vue';
+import logout from '@/pages/logout.vue';
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
             path:'/contact',
             name:'contact',
             component:contact,
+        },
+        {
+            path:'/logout',
+            name:'logout',
+            component:logout,
         }
     ]
 })
