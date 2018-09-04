@@ -2,8 +2,10 @@
     <div class='row'>
         <div class="col-md-12">
             <form @submit.prevent="login">
-                <app-input label="Login:" type="text" v-model="username"/>
-                <app-input label="Senha:" type="password" v-model="passwd"/>
+                <app-input label="Login:" type="text" v-model="username"
+                    required />
+                <app-input label="Senha:" type="password" v-model="passwd"
+                    required />
                 <button class="btn btn-primary btn-block">
                     Login
                 </button>
@@ -27,10 +29,13 @@
 
                 this.$http.post(this.$resource.login, data)
                     .then(resp=>{
-                        console.log(resp.data)
                         this.$emit('getLogin', true)
                     })
-                    .catch(error=>console.log(error.response))
+                    .catch(error=>{
+                        this.$emit('getLogin', false)
+                    })
+                this.username='';
+                this.passwd='';
 
                 console.log('Logging.....')
             }

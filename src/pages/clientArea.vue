@@ -1,18 +1,28 @@
 <template>
     <div class="container-fluid">
-        <h3 v-if='!isLoggedIn'>
-            {{message}}
+        <Alert cssClass="danger" :showAlert="showAlert">
+            {{error}}
+        </Alert>
+        {{showAlert}}
+        <div v-if='!isLoggedIn'>
+            <Alert :showAlert="!isLoggedIn" cssClass="info">
+                <h3>Atenção!</h3>
+                <h4>{{message}}</h4>
+            </Alert>
             <login @getLogin="handleLogin"/>
-        </h3>
-        <Card v-for="album in albums" :key="album.uuid" v-else>
-            <img width="280" height="200" slot="img"
-             :src="album.thumbnail_data.src"
-             :description="album.description"
-             @click="albumDetail(album.uuid)" />
-            <div slot="desc" id="description">
-                <h5>{{album.description}}</h5>
-            </div>
-        </Card>
+        </div>
+        <transition name="appear" v-else>
+            <Card v-for="album in albums" :key="album.uuid">
+                <img width="280" height="200" slot="img"
+                 :src="album.thumbnail_data.src"
+                 :description="album.description"
+                 @click="albumDetail(album.uuid)" />
+                <div slot="desc" id="description">
+                    <h5>{{album.description}}</h5>
+                </div>
+            </Card>
+        </transition>
+        <button type="button" @click="showAlert=!showAlert">Show</button>
     </div>
 
 </template>
@@ -26,6 +36,8 @@
                 albums:[],
                 message:null,
                 isLoggedIn:false,
+                error:null,
+                showAlert:false,
             }
         },
         mounted(){
@@ -54,9 +66,19 @@
                 if(login){
                     this.getAlbums();
                 }
+                else{
+                    console.log('OKOKOK')
+                    this.error = 'Verifique usuário e senha.'
+                }
             }
         },
     }
 </script>
 <style>
+.fade-enter-active, .fade-leave-active{
+    transition:opacity .5s;
+}
+.fade-enter, .fade-leave-to{
+    opacity:0;
+}
 </style>

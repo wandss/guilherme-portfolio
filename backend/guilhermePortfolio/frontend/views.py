@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework import status
 from .serializers import (NavbarItemSerializer, BrandSerializer)
 from .models import NavbarItem, Brand
 
@@ -31,10 +32,10 @@ class LoginAPIView(APIView):
 
         if user:
             login(request, user)
-            return Response('ok')
+            return Response()
 
         else:
-            return Response(403)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 class LogoutAPIView(APIView):

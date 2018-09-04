@@ -11,6 +11,7 @@ import NavBar from '@/components/navBar'
 import Overlay from '@/components/Overlay'
 import AppInput from '@/components/AppInput'
 import AppTextArea from '@/components/AppTextArea'
+import Alert from '@/components/Alert';
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -24,6 +25,7 @@ Vue.component('Card', Card);
 Vue.component('ImageViewer', ImageViewer);
 Vue.component('AppInput', AppInput);
 Vue.component('AppTextArea', AppTextArea);
+Vue.component('Alert', Alert);
 Vue.use(VueCookies)
 Vue.prototype.$http = axios;
 Vue.prototype.$resource = resources;
