@@ -3,9 +3,10 @@
         <div class="col-md-12">
             <form @submit.prevent="login">
                 <app-input label="Login:" type="text" v-model="username"
-                    required />
+                 @input="$emit('closeAlert')"
+                 required />
                 <app-input label="Senha:" type="password" v-model="passwd"
-                    required />
+                 required />
                 <button class="btn btn-primary btn-block">
                     Login
                 </button>
@@ -37,7 +38,6 @@
                 this.username='';
                 this.passwd='';
 
-                console.log('Logging.....')
             }
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
-        <div :class="['alert', 'alert-'+cssClass,]" v-show="show">
-            <a class="close" @click="show=!show">
+        <div :class="['alert', 'alert-'+cssClass,]" v-show="showAlert">
+            <a class="close" @click="$emit('close')">
                 &times;
             </a>
             <slot></slot>
@@ -24,7 +24,7 @@
         },
         data(){
             return{
-                show:this.showAlert
+                show:false
             }
         },
     }

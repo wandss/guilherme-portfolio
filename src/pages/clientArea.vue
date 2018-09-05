@@ -1,15 +1,10 @@
 <template>
     <div class="container-fluid">
-        <Alert cssClass="danger" :showAlert="showAlert">
-            {{error}}
+        <Alert :showAlert="showAlert" :cssClass="alertCss" @close="showAlert=false">
+            <h4>{{message}}</h4>
         </Alert>
-        {{showAlert}}
         <div v-if='!isLoggedIn'>
-            <Alert :showAlert="!isLoggedIn" cssClass="info">
-                <h3>Atenção!</h3>
-                <h4>{{message}}</h4>
-            </Alert>
-            <login @getLogin="handleLogin"/>
+            <login @getLogin="handleLogin" @closeAlert="showAlert=false"/>
         </div>
         <transition name="appear" v-else>
             <Card v-for="album in albums" :key="album.uuid">
@@ -22,7 +17,6 @@
                 </div>
             </Card>
         </transition>
-        <button type="button" @click="showAlert=!showAlert">Show</button>
     </div>
 
 </template>
@@ -35,9 +29,9 @@
             return{
                 albums:[],
                 message:null,
-                isLoggedIn:false,
-                error:null,
+                isLoggedIn:true,
                 showAlert:false,
+                alertCss:'info',
             }
         },
         mounted(){
@@ -48,14 +42,22 @@
                 this.$http.get(this.$resource.privateAlbums)
                     .then(resp=>{
                         this.message=null;
-                        this.isLoggedIn=true;
                         this.albums = resp.data;
+                        if(this.albums.length===0){
+                            this.message="Hmmm... parece que não existem albums disponíveis!";
+                            this.showAlert=true;
+                            this.alertCss="warning";
+                        }
+                        else{
+                            //Create Alert with album description as message
+                            //Or create Welcome alert with desctiptive message.
+                        }
                 })
                 .catch(error=>{
-                    console.log(error)
-                    console.log(error.response)
                     if(error.response.status === 403){
-                        this.message = 'É necessário logar para ter acesso à essa área!!!'
+                        this.message = 'É necessário logar para ter acesso a essa área!!!'
+                        this.showAlert=true;
+                        this.isLoggedIn=false;
                     }
                 })
             },
@@ -64,13 +66,16 @@
             },
             handleLogin(login){
                 if(login){
+                    this.isLoggedIn=true;
+                    this.showAlert=false;
                     this.getAlbums();
                 }
                 else{
-                    console.log('OKOKOK')
-                    this.error = 'Verifique usuário e senha.'
+                    this.message= 'Verifique usuário e senha.'
+                    this.showAlert=true;
+                    this.alertCss='danger';
                 }
-            }
+            },
         },
     }
 </script>
@@ -79,6 +84,6 @@
     transition:opacity .5s;
 }
 .fade-enter, .fade-leave-to{
-    opacity:0;
+    opacity:1;
 }
 </style>

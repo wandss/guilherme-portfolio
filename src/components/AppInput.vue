@@ -3,7 +3,10 @@
         <label>{{label}}</label>
         <input class="form-control" :type="type"
          @input="$emit('input', $event.target.value)"
-         :required="required"/>
+         :required="required"
+         :disabled="disabled"
+         :value="value"
+         />
     </div>
 </template>
 <script>
@@ -21,6 +24,13 @@ export default{
             type:Boolean,
             default:false,
         },
+        value:{
+            default:'null'
+        },
+        disabled:{
+            type:Boolean,
+            default:false,
+        }
     }
 }
 </script>
