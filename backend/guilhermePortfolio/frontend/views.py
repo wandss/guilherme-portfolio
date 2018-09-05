@@ -35,12 +35,12 @@ class LoginAPIView(APIView):
             return Response()
 
         else:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class LogoutAPIView(APIView):
 
     def get(self, request):
         logout(request)
-        return Response('loggedout')
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
