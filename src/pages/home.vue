@@ -4,7 +4,7 @@
             <PhotoCard v-for="album in albums" :key="album.uuid"
              @click="albumDetail(album.uuid)">
                 <div slot="name" id="albumName">
-                    <h4>{{album.name}}</h4>
+                    <h5>{{album.name}}</h5>
                     <p>
                         Junho /2018
                     </p>
@@ -13,7 +13,7 @@
                  width="280" height="200"
                 />
                 <div slot="desc" id="description">
-                    <h5>{{album.description}}</h5>
+                    <h6>{{album.description}}</h6>
                 </div>
             </PhotoCard>
         </div>

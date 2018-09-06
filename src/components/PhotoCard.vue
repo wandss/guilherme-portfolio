@@ -41,7 +41,7 @@
     box-shadow:-3px 9px 14px 1px #111;
     border-radius:2px;
     max-width:300px;
-    overflow:auto;
+    overflow:hidden;
 }
 #card:hover{
     box-shadow:-10px 15px 20px 1px black;
