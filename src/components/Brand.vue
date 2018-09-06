@@ -1,6 +1,6 @@
 <template>
-    <div  id="brand">
-        <router-link to="/" id="link">
+    <div  id="brand" class="float-left">
+        <router-link to="/managealbums" id="link">
             <h1>{{title}}</h1>
             <h1>{{subtitle}}</h1>
         </router-link>
