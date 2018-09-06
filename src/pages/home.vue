@@ -1,25 +1,21 @@
 <template>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-md-12 center-block">
-                <Card v-for="album in albums" :key="album.uuid"
-                 @click="albumDetail(album.uuid)">
-                    <div slot="name" id="albumName">
-                        <h4>
-                            {{album.name}}
-                        </h4>
-                        <p>
-                            Junho /2018
-                        </p>
-                    </div>
-                    <img :src="album.thumbnail_data.src" slot="img"
-                     width="280" height="200"
-                    />
-                    <div slot="desc" id="description">
-                        <h5>{{album.description}}</h5>
-                    </div>
-                </Card>
-            </div>
+            <PhotoCard v-for="album in albums" :key="album.uuid"
+             @click="albumDetail(album.uuid)">
+                <div slot="name" id="albumName">
+                    <h4>{{album.name}}</h4>
+                    <p>
+                        Junho /2018
+                    </p>
+                </div>
+                <img :src="album.thumbnail_data.src" slot="img"
+                 width="280" height="200"
+                />
+                <div slot="desc" id="description">
+                    <h5>{{album.description}}</h5>
+                </div>
+            </PhotoCard>
         </div>
     </div>
 </template>

@@ -1,12 +1,14 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
       <NavBar />
       <div class="row">
-          <div class="col-md-12">
+          <div class="col">
               <Brand v-for="info in brandInfo" :key="info.title"
                :title="info.title" :subtitle="info.subtitle"/>
               <div class="row">
-                  <router-view />
+                  <div class="col">
+                      <router-view />
+                  </div>
               </div>
           </div>
       </div>
@@ -39,6 +41,7 @@ export default {
 <style>
 @import './assets/css/bootstrap.min.css';
 @import './assets/css/customFonts.css';
+@import './assets/css/fontawesomeAll.min.css';
 
 body{
     color:#9A9A9A;

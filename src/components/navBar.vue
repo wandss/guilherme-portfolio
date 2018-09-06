@@ -1,7 +1,7 @@
 <template>
     <div class="row">
-        <div class="col-md-12">
-            <div class="pull-right" id="items">
+        <div class="col">
+            <div class="float-right" id="items">
                 <NavbarItem v-for="item in menuItems" :key="item.uuid"
                  :name="item.name" :link="item.link" />
             </div>

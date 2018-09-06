@@ -1,12 +1,12 @@
 <template>
-    <div class="container-fluid">
+    <div>
         <image-viewer :showImage="viewImage" @click="viewImage=!viewImage"
-        v-if="image!==null" :imageCount="imageCount" :image="image"
-        :index="currentImageIndex" @nextImage="imageDetail"
-        @prevImage="imageDetail"
+         v-if="image!==null" :imageCount="imageCount" :image="image"
+         :index="currentImageIndex" @nextImage="imageDetail"
+         @prevImage="imageDetail"
         />
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col">
                 <div class="text-center">
                     <img id="photoGallery" v-for="(image, index) in album" :key="index"
                      width="280" height="200"

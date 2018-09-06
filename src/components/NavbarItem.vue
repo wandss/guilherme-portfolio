@@ -1,9 +1,9 @@
 <template>
-    <h4>
+    <h5>
         <router-link :to="link">
             {{name}}
         </router-link>
-    </h4>
+    </h5>
 </template>
 <script>
 export default{
@@ -21,12 +21,12 @@ export default{
 }
 </script>
 <style scoped>
-h4{
+h5{
     display:inline;
-    margin-right:2rem;
+    margin-right:1rem;
     cursor:pointer;
 }
-h4:hover{
+h5:hover{
     text-decoration:underline red;
     transition:all .5s ease-in;
 }

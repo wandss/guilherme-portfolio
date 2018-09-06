@@ -1,6 +1,6 @@
 <!-- Create API to retrieve contact data and fields -->
 <template>
-    <div class="container-fluid">
+    <div class="container">
         <h2>Contatos:</h2>
         <p>(31)9 9476-6537</p>
         <p>fotoguilhermes@gmail.com</p>
@@ -17,7 +17,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn btn-success">
+                    <button class="btn btn-outline-success">
                         Enviar
                     </button>
                 </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container">
         <Alert :showAlert="showAlert" :cssClass="alertCss" @close="showAlert=false">
             <h4>{{message}}</h4>
         </Alert>
@@ -7,7 +7,7 @@
             <login @getLogin="handleLogin" @closeAlert="showAlert=false"/>
         </div>
         <transition name="appear" v-else>
-            <Card v-for="album in albums" :key="album.uuid">
+            <PhotoCard v-for="album in albums" :key="album.uuid">
                 <img width="280" height="200" slot="img"
                  :src="album.thumbnail_data.src"
                  :description="album.description"
@@ -15,7 +15,7 @@
                 <div slot="desc" id="description">
                     <h5>{{album.description}}</h5>
                 </div>
-            </Card>
+            </PhotoCard>
         </transition>
     </div>
 

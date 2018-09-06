@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-4" @click="$emit('click')" id="container">
+    <div class="col" @click="$emit('click')" id="container">
         <div id="card" :style="[rotateCard,]">
             <slot name="name"></slot>
             <slot name="img"></slot>
@@ -10,7 +10,7 @@
 
 <script>
     export default {
-        name: 'Card',
+        name: 'PhotoCard',
         props:{
             size:{
                 type:String,
@@ -37,7 +37,7 @@
 #card{
     border:#9A9A9A 1px solid;
     background-color:#FFF;
-    padding:0.4rem 1rem 2rem 1rem;
+    padding:0.4rem 1rem 2rem .5rem;
     box-shadow:-3px 9px 14px 1px #111;
     border-radius:2px;
     max-width:300px;

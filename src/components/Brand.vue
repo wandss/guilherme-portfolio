@@ -1,16 +1,10 @@
 <template>
-  <div class="row" id="brand">
-      <div class="col-md-12">
-          <router-link to="/" id="link">
-              <h1>
-                  {{title}}
-              </h1>
-              <h1>
-                  {{subtitle}}
-              </h1>
-          </router-link>
-      </div>
-  </div>
+    <div  id="brand">
+        <router-link to="/" id="link">
+            <h1>{{title}}</h1>
+            <h1>{{subtitle}}</h1>
+        </router-link>
+    </div>
 </template>
 
 <script>
@@ -40,7 +34,7 @@ h1{
     text-shadow:10px 15px 8px black;
     cursor:default;
     font-family:indie-flower, arial, sans-serif;
-    font-size:5rem;
+    font-size:3rem;
     /*TODO
     Make Brand a link to root url's page
     Use diferent font

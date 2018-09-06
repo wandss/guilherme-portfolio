@@ -6,7 +6,7 @@ import VueCookies from 'vue-cookies';
 import resources from '@/resources';
 import ImagePlaceHolder from '@/components/ImagePlaceHolder'
 import ImageViewer from '@/components/ImageViewer'
-import Card from '@/components/Card'
+import PhotoCard from '@/components/PhotoCard'
 import NavBar from '@/components/navBar'
 import Overlay from '@/components/Overlay'
 import AppInput from '@/components/AppInput'
@@ -21,7 +21,7 @@ Vue.config.productionTip = false
 Vue.component('ImagePlaceHolder', ImagePlaceHolder);
 Vue.component('NavBar', NavBar);
 Vue.component('Overlay', Overlay);
-Vue.component('Card', Card);
+Vue.component('PhotoCard', PhotoCard);
 Vue.component('ImageViewer', ImageViewer);
 Vue.component('AppInput', AppInput);
 Vue.component('AppTextArea', AppTextArea);

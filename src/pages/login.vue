@@ -7,7 +7,7 @@
                  required />
                 <app-input label="Senha:" type="password" v-model="passwd"
                  required />
-                <button class="btn btn-primary btn-block">
+                <button class="btn btn-secondary btn-block">
                     Login
                 </button>
             </form>
