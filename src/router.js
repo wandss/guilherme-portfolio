@@ -5,7 +5,7 @@ import Album from '@/pages/album.vue';
 import clientArea from '@/pages/clientArea.vue';
 import contact from '@/pages/contact.vue';
 import logout from '@/pages/logout.vue';
-
+import ManageAlbums from '@/pages/manageAlbums';
 Vue.use(Router);
 
 export default new Router({
@@ -36,6 +36,11 @@ export default new Router({
             path:'/logout',
             name:'logout',
             component:logout,
+        },
+        {
+            path:'/managealbums',
+            name:'managealbums',
+            component:ManageAlbums,
         }
     ]
 })
