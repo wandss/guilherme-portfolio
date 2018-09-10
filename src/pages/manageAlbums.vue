@@ -13,7 +13,7 @@
                 </Card>
             </div>
         </div>
-        <Modal modalSize="modal-full" :hasFooter="true" title="Modal Title" 
+        <Modal modalSize="modal-full" :hasFooter="true" title="Modal Title"
          :show="showModal"
          @click="showModal=!showModal" >
             <div slot="body">
@@ -52,9 +52,14 @@ export default{
         saveFile(){
             console.log('Uploading....')
             console.log(this.uploadedContent)
+            let formData = new FormData();
+            formData.append('file', this.uploadedContent)
+            formData.append('name', this.uploadedContent.name)
+            formData.append('otherStuff','anyothercontenthere')
 
-            this.$http.post(this.$resource.imageUpload, this.uploadedContent,
-                {headers:{'Content-Type':'application/x-www-form-urlencoded'}})
+            //this.$http.post(this.$resource.imageUpload, this.uploadedContent,
+            this.$http.post(this.$resource.imageUpload, formData,)
+            //    {headers:{'Content-Type':'application/x-www-form-urlencoded'}})
 //                {headers:{'Content-Type':'multpart/form-data'}})
                 .then(resp=>console.log(resp.data))
                 .catch(error=>{

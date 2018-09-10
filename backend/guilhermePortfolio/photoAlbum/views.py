@@ -4,7 +4,8 @@ from rest_framework.generics import (ListAPIView, CreateAPIView,
                                      ListCreateAPIView, RetrieveAPIView)
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.parsers import MultiPartParser, FileUploadParser
+from rest_framework.parsers import (MultiPartParser, FileUploadParser,
+                                    JSONParser)
 from rest_framework.response import Response
 from .models import PhotoAlbum, Image
 from .serializers import PhotoAlbumSerializer, ImageSerializer
@@ -45,7 +46,7 @@ class PrivatePhotoAlbumListAPIView(ListAPIView):
                 Q(published=query)
             )
 
-        return queryset            
+        return queryset
 
 
 class PhotoAlbumRetrieve(RetrieveAPIView):
@@ -68,7 +69,7 @@ class ImageListAPIView(ListAPIView):
     queryset = Image.objects.all()
 
 class ImageCreateAPIView(APIView):
-    parser_classes = (MultiPartParser, )
+    parser_classes = (MultiPartParser,JSONParser )
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
 
