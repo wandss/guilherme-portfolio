@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (PublicPhotoAlbumListAPIView, PrivatePhotoAlbumListAPIView,
-                    PhotoAlbumCreateAPIView, ImageCreateAPIView,
-                    PhotoAlbumRetrieve)
+                    PhotoAlbumCreateAPIView, ImageListAPIView,
+                    ImageCreateAPIView, PhotoAlbumRetrieve)
 
 app_name = 'photoAlbum'
 urlpatterns = [
@@ -12,5 +12,6 @@ urlpatterns = [
     path('private/', PrivatePhotoAlbumListAPIView.as_view(), 
          name="privatelist"),
     path('new/', PhotoAlbumCreateAPIView.as_view(), name="new"),
-    path('images/', ImageCreateAPIView.as_view(), name="images"),
+    path('images/', ImageListAPIView.as_view(), name="images"),
+    path('images/new', ImageCreateAPIView.as_view(), name="newimage"),
 ]

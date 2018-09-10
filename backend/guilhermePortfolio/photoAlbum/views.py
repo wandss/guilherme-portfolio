@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.db.models import Q
 from rest_framework.generics import (ListAPIView, CreateAPIView,
                                      ListCreateAPIView, RetrieveAPIView)
+from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.parsers import MultiPartParser, FileUploadParser
+from rest_framework.response import Response
 from .models import PhotoAlbum, Image
 from .serializers import PhotoAlbumSerializer, ImageSerializer
 
@@ -60,9 +63,26 @@ class PhotoAlbumCreateAPIView(CreateAPIView):
     serializer_class = PhotoAlbumSerializer
     queryset = PhotoAlbum.objects.all()
 
-class ImageCreateAPIView(ListCreateAPIView):
+class ImageListAPIView(ListAPIView):
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
+
+class ImageCreateAPIView(APIView):
+    parser_classes = (MultiPartParser, )
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
+
+
+    def post(self, request, format=None):
+        import pdb;pdb.set_trace()#DEBUG
+        #document = request.data['file']
+        #uploaded = FileUpload.objects.create(document=document)
+        #uploaded.save()
+        data = 'OK'
+        return Response(data)
+
+
+
 
 
 
