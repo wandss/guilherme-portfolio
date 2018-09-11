@@ -10,5 +10,6 @@ export default{
     sendMessage:baseUrl+'/contact/send',
     login:baseUrl+'/frontend/login/',
     logout:baseUrl+'/frontend/logout/',
+    images:baseUrl+'/albums/images',
     imageUpload:baseUrl+'/albums/images/new',
 }

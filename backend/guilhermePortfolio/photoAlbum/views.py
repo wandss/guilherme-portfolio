@@ -3,10 +3,10 @@ from django.db.models import Q
 from rest_framework.generics import (ListAPIView, CreateAPIView,
                                      ListCreateAPIView, RetrieveAPIView)
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.parsers import (MultiPartParser, FileUploadParser,
-                                    JSONParser)
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
+from rest_framework import status
 from .models import PhotoAlbum, Image
 from .serializers import PhotoAlbumSerializer, ImageSerializer
 
@@ -64,24 +64,24 @@ class PhotoAlbumCreateAPIView(CreateAPIView):
     serializer_class = PhotoAlbumSerializer
     queryset = PhotoAlbum.objects.all()
 
+
 class ImageListAPIView(ListAPIView):
+    permission_classes = (IsAdminUser,)
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
+
 
 class ImageCreateAPIView(APIView):
-    parser_classes = (MultiPartParser,JSONParser )
-    serializer_class = ImageSerializer
-    queryset = Image.objects.all()
-
+    permission_classes = (IsAdminUser,)
+    parser_classes = (MultiPartParser, FormParser)
 
     def post(self, request, format=None):
-        import pdb;pdb.set_trace()#DEBUG
-        #document = request.data['file']
-        #uploaded = FileUpload.objects.create(document=document)
-        #uploaded.save()
-        data = 'OK'
-        return Response(data)
+        serializer = ImageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 

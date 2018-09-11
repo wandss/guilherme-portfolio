@@ -5,10 +5,16 @@ from .models import PhotoAlbum, Image
 
 class ImageSerializer(ModelSerializer):
 
+    image_url = SerializerMethodField()
+
     class Meta:
         model = Image
-        exclude = ('id',) 
+        exclude = ('id',)
 
+
+    def get_image_url(self, obj):
+        if obj.image:
+            return str(obj.image.url)
 
 
 class PhotoAlbumSerializer(ModelSerializer):
@@ -19,16 +25,16 @@ class PhotoAlbumSerializer(ModelSerializer):
 
     class Meta:
         model = PhotoAlbum
-        exclude = ('id',) 
+        exclude = ('id',)
 
     def get_image_data(self, obj):
         image_urls = [{'src':image.image.url, 'width':image.image.width,
-                       'height':image.image.height} 
+                       'height':image.image.height}
                       for image in obj.images.select_related()]
         return image_urls
 
     def get_thumbnail_data(self, obj):
-        return {'uuid':obj.thumbnail.uuid, 
+        return {'uuid':obj.thumbnail.uuid,
                 'src':obj.thumbnail.image.url,
                 'width':obj.thumbnail.width,
                 'height':obj.thumbnail.image.height

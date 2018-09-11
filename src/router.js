@@ -6,6 +6,8 @@ import clientArea from '@/pages/clientArea.vue';
 import contact from '@/pages/contact.vue';
 import logout from '@/pages/logout.vue';
 import ManageAlbums from '@/pages/manageAlbums';
+import ImagesManager from '@/pages/imagesManager';
+
 Vue.use(Router);
 
 export default new Router({
@@ -41,6 +43,11 @@ export default new Router({
             path:'/managealbums',
             name:'managealbums',
             component:ManageAlbums,
+        },
+        {
+            path:'/imagesmanager',
+            name:'imagesmanager',
+            component:ImagesManager,
         }
     ]
 })
