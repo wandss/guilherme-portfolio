@@ -9,13 +9,15 @@ Some errors may return like : {detail:['message'] => add this to an Alert?
         <div class="row">
             <div class="col">
                 <Card title="Gerenciar Imagens" icon="fa fa-images"
-                 @click="$router.push('imagesmanager')"
+                 @click="$router.push('/admin/images')"
                 >
                     <div slot="content"> </div>
                 </Card>
             </div>
             <div class="col">
-                <Card title="Gerenciar Album" icon="fa fa-film">
+                <Card title="Gerenciar Album" icon="fa fa-film" 
+                 @click="$router.push('/admin/albums')"
+                >
                     <div slot="content"> </div>
                 </Card>
             </div>
