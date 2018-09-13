@@ -4,10 +4,10 @@
             <div class="col">
                 <div class="btn-group">
                     <button class="btn btn-info">
-                        <span class="fa fa-eye"> </span> 
+                        <span class="fa fa-eye"> </span>
                         Ver Albums</button>
                     <button class="btn btn-info" @click="createAlbum=true">
-                        <span class="fa fa-plus-square"> </span> 
+                        <span class="fa fa-plus-square"> </span>
                          Criar Album
                     </button>
                 </div>
@@ -17,7 +17,7 @@
     </div>
 </template>
 <script>
-import CreateAlbum from '@/components/crud/CreateAlbum';
+import CreateAlbum from '@/pages/admin/CreateAlbum';
 export default{
     name:'AlbumManager',
     components:{CreateAlbum,},

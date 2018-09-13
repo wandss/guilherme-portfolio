@@ -25,7 +25,7 @@
     </div>
 </template>
 <script>
-import FileCreate from '@/components/crud/FileCreate'
+import FileCreate from '@/pages/admin/FileCreate'
 export default{
     name:'imagesManager',
     components:{FileCreate,},

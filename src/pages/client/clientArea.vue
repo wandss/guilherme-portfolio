@@ -21,7 +21,7 @@
 
 </template>
 <script>
-    import Login from '@/pages/login';
+    import Login from '@/pages/forms/login';
     export default{
         name:'clientArea',
         components:{Login,},

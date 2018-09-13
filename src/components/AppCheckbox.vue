@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <input type="checkbox" :id="label"
-         @input="$emit('input', $event.target.checked)"
+         @change="$emit('input', $event.target.checked)"
         />
         <label :for="label"> {{label}}</label>
     </div>
@@ -14,6 +14,12 @@ export default{
             type:String,
             default:'Label Name Here',
             required:true,
+        }
+    },
+    methods:{
+        handleInput(e){
+            console.log(e.target.checked)
+            this.$emit('input', e.target.checked)
         }
     }
 }
@@ -42,10 +48,10 @@ input:checked{
 }
 input:checked:after{
     content: '\2714';
-    font-size: 1.8rem;
+    font-size: 20px;
     position: absolute;
-    top:-1.3rem;
-    left:-.1rem;
+    top:-10px;
+    left:0px;
     /*color: #99a1a7;*/
     /*color:#56ad79;*/
     color:rgba(76, 196, 102, 1);

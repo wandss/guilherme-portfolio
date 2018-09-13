@@ -2,12 +2,12 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from  '@/pages/home.vue';
 import Album from '@/pages/album.vue';
-import clientArea from '@/pages/clientArea.vue';
-import contact from '@/pages/contact.vue';
-import logout from '@/pages/logout.vue';
-import ManageAlbums from '@/pages/manageAlbums';
-import ImagesManager from '@/pages/imagesManager';
-import AlbumManager from '@/pages/AlbumManager';
+import clientArea from '@/pages/client/clientArea.vue';
+import contact from '@/pages/forms/contact.vue';
+import logout from '@/pages/forms/logout.vue';
+import ManageAlbums from '@/pages/admin/manageAlbums';
+import ImagesManager from '@/pages/admin/imagesManager';
+import AlbumManager from '@/pages/admin/AlbumManager';
 
 Vue.use(Router);
 

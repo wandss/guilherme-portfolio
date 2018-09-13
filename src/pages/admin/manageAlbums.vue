@@ -15,7 +15,7 @@ Some errors may return like : {detail:['message'] => add this to an Alert?
                 </Card>
             </div>
             <div class="col">
-                <Card title="Gerenciar Album" icon="fa fa-film" 
+                <Card title="Gerenciar Album" icon="fa fa-film"
                  @click="$router.push('/admin/albums')"
                 >
                     <div slot="content"> </div>
