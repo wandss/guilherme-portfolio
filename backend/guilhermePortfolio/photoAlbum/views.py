@@ -18,7 +18,7 @@ class PublicPhotoAlbumListAPIView(ListAPIView):
     serializer_class = PhotoAlbumSerializer
 
     def get_queryset(self):
-        """Filter results"""
+        """Filter results."""
         queryset = PhotoAlbum.objects.filter(public=True)
 
         query = self.request.GET.get('q')
@@ -35,6 +35,7 @@ class PublicPhotoAlbumListAPIView(ListAPIView):
 class PrivatePhotoAlbumListAPIView(ListAPIView):
     """Returns all Private Albums objects."""
     serializer_class = PhotoAlbumSerializer
+
 
     def get_queryset(self):
         queryset = PhotoAlbum.objects.filter(public=False)
@@ -61,8 +62,24 @@ class PhotoAlbumRetrieve(RetrieveAPIView):
 
 
 class PhotoAlbumCreateAPIView(CreateAPIView):
+    permissions_classes = (IsAdminUser, )
     serializer_class = PhotoAlbumSerializer
     queryset = PhotoAlbum.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        """Gets images's ids if uuid's has been passed from client application
+        """
+        try:
+            request.data['images'] = [
+                    Image.objects.get(uuid=uuid).id
+                    for uuid in request.data.get('images')
+                    ]
+
+        except Exception as e:
+            #TODO: Create response here.
+            pass
+
+        return self.create(request, *args, **kwargs)
 
 
 class ImageListAPIView(ListAPIView):
@@ -83,6 +100,15 @@ class ImageCreateAPIView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class ThumbnailListAPIView(ListAPIView):
+    permission_classes = (IsAdminUser,)
+    serializer_class = ImageSerializer
+
+    def get_queryset(self):
+
+        queryset = Image.objects.filter(thumbnail=None)
+        return queryset
 
 
 

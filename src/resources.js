@@ -12,4 +12,6 @@ export default{
     logout:baseUrl+'/frontend/logout/',
     images:baseUrl+'/albums/images',
     imageUpload:baseUrl+'/albums/images/new',
+    thumbnails:baseUrl+'/albums/thumbnails',
+    createAlbum:baseUrl+'/albums/new/',
 }

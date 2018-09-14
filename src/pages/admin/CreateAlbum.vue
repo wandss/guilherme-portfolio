@@ -1,14 +1,19 @@
 <template>
-    <modal :show="show" modalSize="modal-full" title="Criar Album"
-     @click="$emit('close')" >
-        <div slot="body">
-            <modal title="Instruções" :show="hasInstructions" @click="hasInstructions=false">
-                <div slot="body">
-                    <h5>Foto de Capa escolhida. </h5>
-                    <h6>Ecolha agora as imagens que farão parte do álbum.</h6>
-                </div>
-            </modal>
-            <form>
+    <form @submit.prevent="createAlbum">
+        <modal :show="show" modalSize="modal-full" title="Criar Album"
+         @click="$emit('close')" >
+            <div slot="body">
+                <modal title="Instruções" :show="hasInstructions" @click="hasInstructions=false">
+                    <div slot="body">
+                        <div v-if="success">
+                            <h4>{{message}}</h4>
+                        </div>
+                        <div v-else>
+                            <h5>Foto de Capa escolhida. </h5>
+                            <h6>Ecolha agora as imagens que farão parte do álbum.</h6>
+                        </div>
+                    </div>
+                </modal>
                 <div class="row">
                     <div class="col">
                         <app-input type="text" required label="Nome do Album:"
@@ -23,14 +28,17 @@
                     <gallery :title="selectionType" :images="images"
                      @click="selectedImage($event)" />
                 </div>
-                <hr/>
-                Foto da Capa:
-                Após Clicar na foto alterar nome para:
-                Selecionar fotos.
-                <hr/>
-            </form>
-        </div>
-    </modal>
+            </div>
+            <div slot="footer">
+                <button class="btn btn-outline-primary">
+                    Criar Album
+                </button>
+                <button class="btn btn-outline-danger" type="button">
+                    Cancelar
+                </button>
+            </div>
+        </modal>
+    </form>
 </template>
 <script>
 import Modal from '@/components/Modal';
@@ -57,12 +65,18 @@ export default{
             thumbnail:null,
             albumPictures:[],
             hasInstructions:false,
+            success:false,
         }
     },
     mounted(){
-        this.getAllImages()
+        this.getThumbnails()
     },
     methods:{
+        getThumbnails(){
+            this.$http.get(this.$resource.thumbnails)
+                .then(resp=>this.images=resp.data)
+                .catch(error=>console.log(error.response))
+        },
         getAllImages(){
             this.$http.get(this.$resource.images)
                 .then(resp=>{
@@ -77,8 +91,31 @@ export default{
             if(this.thumbnail===null){
                 this.thumbnail = image[0]
                 this.hasInstructions=true
+                this.getAllImages()
             }
             this.albumPictures=image;
+        },
+        createAlbum(e){
+            const data = {name:this.name, description:this.description,
+                published:this.publish.checked, public:this.public.checked,
+                thumbnail:this.thumbnail.uuid, images:this.albumPictures.map(image=>image.uuid),
+            }
+
+            const csrfToken = this.$cookies.get('csrftoken')
+            const headers = {'ContentType':'application/json', 'X-CSRFToken':csrfToken}
+
+            this.$http.post(this.$resource.createAlbum, data, {headers:headers})
+                .then(resp=>{
+                    e.target.reset();
+                    this.message="Album Incluído com Sucesso";
+                    this.hasInstructions=true;
+                    this.success=true;
+                    this.getThumbnails();
+                    this.thumbnail=null;
+                    this.albumPictures=[];
+
+                })
+                .catch(error=>console.log(error.response))
         }
     },
     computed:{

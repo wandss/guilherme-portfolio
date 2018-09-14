@@ -13,7 +13,7 @@
                 <div class="modal-body">
                     <slot name="body"></slot>
                 </div>
-                <div class="modal-footer" v-if="hasFooter">
+                <div class="modal-footer" >
                     <slot name="footer"></slot>
                 </div>
             </div>
