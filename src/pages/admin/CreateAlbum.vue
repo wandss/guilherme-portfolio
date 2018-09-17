@@ -1,9 +1,11 @@
 <template>
     <form @submit.prevent="createAlbum">
+
         <modal :show="show" modalSize="modal-full" title="Criar Album"
          @click="$emit('close')" >
             <div slot="body">
-                <modal title="Instruções" :show="hasInstructions" @click="hasInstructions=false">
+                <modal title="Instruções" :show="hasInstructions" 
+                 @click="hasInstructions=false">
                     <div slot="body">
                         <div v-if="success">
                             <h4>{{message}}</h4>
@@ -14,6 +16,10 @@
                         </div>
                     </div>
                 </modal>
+                <upload-form :show="uploadForm=uploadForm"
+                  @close="uploadForm=false"
+                  @getNewImage="images.push($event)"           
+                />
                 <div class="row">
                     <div class="col">
                         <app-input type="text" required label="Nome do Album:"
@@ -24,16 +30,31 @@
                          :label="publish.label" />
                         <app-checkbox v-model="public.checked"
                          :label="public.label" />
+
+                        <div v-if="images.length===0" >
+                            <Alert :showAlert="true" cssClass="warning"
+                             :hasCloseButton='false'>
+                                Não existem fotos disponíves para capa.
+                            </Alert>
+                            <button 
+                             type="button" @click="uploadForm=true" 
+                             class="btn btn-outline-warning btn-block">
+                                <span class="fa fa-plus-square"></span>
+                                Criar imagem de Capa
+                            </button>
+                        </div>
+                        <gallery v-else :title="selectionType" :images="images"
+                         @click="selectedImage($event)" />
                     </div>
-                    <gallery :title="selectionType" :images="images"
-                     @click="selectedImage($event)" />
+
                 </div>
             </div>
             <div slot="footer">
                 <button class="btn btn-outline-primary">
                     Criar Album
                 </button>
-                <button class="btn btn-outline-danger" type="button">
+                <button class="btn btn-outline-danger" type="button"
+                 @click="$emit('close')">
                     Cancelar
                 </button>
             </div>
@@ -44,10 +65,11 @@
 import Modal from '@/components/Modal';
 import AppCheckbox from '@/components/AppCheckbox';
 import Gallery from '@/components/Gallery';
+import UploadForm from '@/components/UploadForm';
 
 export default{
     name:'CreateAlbum',
-    components:{Modal, AppCheckbox, Gallery},
+    components:{Modal, AppCheckbox, Gallery, UploadForm},
     props:{
         show:{
             type:Boolean,
@@ -66,6 +88,7 @@ export default{
             albumPictures:[],
             hasInstructions:false,
             success:false,
+            uploadForm:false,
         }
     },
     mounted(){
@@ -74,7 +97,10 @@ export default{
     methods:{
         getThumbnails(){
             this.$http.get(this.$resource.thumbnails)
-                .then(resp=>this.images=resp.data)
+                .then(resp=>{
+                    this.images=resp.data;
+                    this.uploadForm=resp.data.length===0;
+                })
                 .catch(error=>console.log(error.response))
         },
         getAllImages(){

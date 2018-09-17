@@ -1,13 +1,17 @@
 <template>
     <div class="container">
-        <Alert :showAlert="showAlert" :cssClass="alertCss" @close="showAlert=false">
-            <h4>{{message}}</h4>
-        </Alert>
-        <div v-if='!isLoggedIn'>
-            <login @getLogin="handleLogin" @closeAlert="showAlert=false"/>
-        </div>
-        <transition name="appear" v-else>
+        <div class="row">
+            <Alert :showAlert="showAlert" :cssClass="alertCss" @close="showAlert=false">
+                <h4>{{message}}</h4>
+            </Alert>
+            <div v-if='!isLoggedIn'>
+                <login @getLogin="handleLogin" @closeAlert="showAlert=false"/>
+            </div>
             <PhotoCard v-for="album in albums" :key="album.uuid">
+                <div slot="name" id="albumName">
+                    <h5> {{album.name}} </h5>
+                    <p>{{new Date(album.create_date).toLocaleString()}}</p>
+                </div>
                 <img width="280" height="200" slot="img"
                  :src="album.thumbnail_data.src"
                  :description="album.description"
@@ -16,9 +20,8 @@
                     <h5>{{album.description}}</h5>
                 </div>
             </PhotoCard>
-        </transition>
+        </div>
     </div>
-
 </template>
 <script>
     import Login from '@/pages/forms/login';
@@ -43,6 +46,7 @@
                     .then(resp=>{
                         this.message=null;
                         this.albums = resp.data;
+                        console.log(resp.data)
                         if(this.albums.length===0){
                             this.message="Hmmm... parece que não existem albums disponíveis!";
                             this.showAlert=true;
@@ -77,6 +81,12 @@
                 }
             },
         },
+        computed:{
+            albumDate(date){
+                return new Date(date).toLocaleString()
+
+            },
+        }
     }
 </script>
 <style>

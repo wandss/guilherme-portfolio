@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div :class="['alert', 'alert-'+cssClass,]" v-show="showAlert">
-            <a class="close" @click="$emit('close')">
+            <a v-if="hasCloseButton" class="close" @click="$emit('close')">
                 &times;
             </a>
             <slot></slot>
@@ -20,6 +20,10 @@
                 type:Boolean,
                 default:false,
                 required:true,
+            },
+            hasCloseButton:{
+                type:Boolean,
+                default:true,
             }
         },
         data(){
@@ -31,7 +35,7 @@
 </script>
 <style scoped>
 .alert{
-    box-shadow:-2px 10px 20px 3px #111;
+    box-shadow:-1px 3px 8px 1px #111;
 }
 .fade-enter-active, .fade-leave-active{
     transition:all .5s ease-in-out;

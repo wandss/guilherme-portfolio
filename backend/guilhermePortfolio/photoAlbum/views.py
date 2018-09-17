@@ -42,7 +42,6 @@ class PrivatePhotoAlbumListAPIView(ListAPIView):
         query = self.request.GET.get('q')
 
         if query:
-
             queryset = queryset.filter(
                 Q(published=query)
             )
