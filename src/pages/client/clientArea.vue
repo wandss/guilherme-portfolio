@@ -46,7 +46,6 @@
                     .then(resp=>{
                         this.message=null;
                         this.albums = resp.data;
-                        console.log(resp.data)
                         if(this.albums.length===0){
                             this.message="Hmmm... parece que não existem albums disponíveis!";
                             this.showAlert=true;
