@@ -98,7 +98,7 @@ export default{
         getThumbnails(){
             this.$http.get(this.$resource.thumbnails)
                 .then(resp=>{
-                    this.images=resp.data;
+                    this.images=resp.data.results;
                     this.uploadForm=resp.data.length===0;
                 })
                 .catch(error=>console.log(error.response))
@@ -106,7 +106,7 @@ export default{
         getAllImages(){
             this.$http.get(this.$resource.images)
                 .then(resp=>{
-                    this.images=resp.data
+                    this.images=resp.data.results
                 })
                 .catch(error=>{
                     console.log(error.response)

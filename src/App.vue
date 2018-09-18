@@ -28,7 +28,7 @@ export default {
     methods:{
         getBrandInfo(){
             this.$http.get(this.$resource.brand)
-                .then(resp=>this.brandInfo=resp.data)
+                .then(resp=>this.brandInfo=resp.data.results)
         }
     },
     beforeUpdate(){

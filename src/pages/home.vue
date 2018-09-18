@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <PhotoCard v-for="album in albums" :key="album.uuid"
+            <PhotoCard v-for="album in albums.results" :key="album.uuid"
              @click="albumDetail(album.uuid)">
                 <div slot="name" id="albumName">
                     <h5>{{album.name}}</h5>
@@ -17,6 +17,11 @@
                 </div>
             </PhotoCard>
         </div>
+        <div class="row">
+            <div class="col">
+                Pagination Area
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -25,22 +30,45 @@ export default{
     data(){
         return{
             albums:[],
+            bottom:false,
         }
     },
     methods:{
-        getAlbums(){
-            this.$http.get(this.$resource.publicAlbums)
+        getAlbums(url){
+            this.$http.get(url)
                 .then(resp=>{
-                    this.albums=resp.data
+                    this.albums=resp.data;
                 })
                 .catch(error=>console.log(error.response))
         },
         albumDetail(uuid){
             this.$router.push('/album'+uuid)
+        },
+        getBottom(){
+            const scrollY = window.scrollY
+            const visible = document.documentElement.clientHeight
+            const pageHeight = document.documentElement.scrollHeight
+            //srollY+visible=pageHeight
+            //console.log(scrollY + visible === pageHeight);
+            return scrollY + visible === pageHeight;
         }
     },
     mounted(){
-        this.getAlbums();
+        this.getAlbums(this.$resource.publicAlbums);
+    },
+    created(){
+        window.addEventListener('scroll', ()=>{
+            this.bottom = this.getBottom()
+        })
+    },
+    watch:{
+        bottom(bottom){
+            if(bottom){
+                const url = this.$resource.publicAlbums.split('?')[0]+'?'+
+                    this.albums.next.split('?')[1]
+                this.getAlbums(url)
+            }
+        }
     }
 }
 </script>

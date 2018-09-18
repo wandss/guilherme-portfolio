@@ -42,7 +42,7 @@ export default{
         getAllImages(){
             this.$http.get(this.$resource.images)
                 .then(resp=>{
-                    this.images=resp.data
+                    this.images=resp.data.results
                 })
                 .catch(error=>{
                     console.log(error.response)

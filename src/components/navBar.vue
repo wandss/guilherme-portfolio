@@ -25,7 +25,7 @@ export default{
         getMenu(){
             this.$http.get(this.$resource.navbar)
                 .then(resp=>{
-                    this.menuItems = resp.data
+                    this.menuItems = resp.data.results
                 })
                 .catch(error=>console.log(error))
         }

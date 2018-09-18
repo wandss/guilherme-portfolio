@@ -43,7 +43,7 @@ export default{
         getMenuItems(){
             this.$http.get(this.$resource.adminMenu)
                 .then(resp=>{
-                    this.items=resp.data;
+                    this.items=resp.data.results;
                     this.isLoggedIn = true;
                 })
                 .catch(error=>{
@@ -59,13 +59,14 @@ export default{
         },
         handleLogin(login){
             if(login){
-                this.isLoggedIn = login;
                 this.getMenuItems()
             }
             else{
                 this.alert.message = 'Verifique usuário e senha.';
                 this.alert.cssClass = 'danger';
             }
+            this.isLoggedIn = login;
+            this.alert.show = !login;
         }
     },
 

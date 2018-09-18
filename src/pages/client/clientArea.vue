@@ -45,7 +45,7 @@
                 this.$http.get(this.$resource.privateAlbums)
                     .then(resp=>{
                         this.message=null;
-                        this.albums = resp.data;
+                        this.albums = resp.data.results;
                         if(this.albums.length===0){
                             this.message="Hmmm... parece que não existem albums disponíveis!";
                             this.showAlert=true;
