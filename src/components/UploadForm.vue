@@ -6,7 +6,7 @@
             <div slot="body">
                 <div class="row">
                     <div class="col">
-                        <Alert :showAlert="alert.showAlert" 
+                        <Alert :showAlert="alert.showAlert"
                           @close="alert.showAlert=false"
                           :cssClass="alert.cssClass">
                             {{alert.message}}
@@ -38,9 +38,12 @@ export default{
         },
         alert:{
             type:Object,
-            default:{showAlert:false,
-                cssClass:"danger",
-                message:'Add Message Here',
+            default(){
+                return{
+                    showAlert:false,
+                    cssClass:"danger",
+                    message:'Add Message Here',
+                }
             }
         }
     },
