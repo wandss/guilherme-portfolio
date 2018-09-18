@@ -1,6 +1,6 @@
 <template>
     <div class='row'>
-        <div class="col-md-12">
+        <div class="col">
             <form @submit.prevent="login">
                 <app-input label="Login:" type="text" v-model="username"
                  @input="$emit('closeAlert')"

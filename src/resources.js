@@ -14,4 +14,5 @@ export default{
     imageUpload:baseUrl+'/albums/images/new',
     thumbnails:baseUrl+'/albums/thumbnails',
     createAlbum:baseUrl+'/albums/new/',
+    adminMenu:baseUrl+'/frontend/adminmenu',
 }

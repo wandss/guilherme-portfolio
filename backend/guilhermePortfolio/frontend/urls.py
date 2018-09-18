@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (NavbarItemListAPIView, BrandListAPIView,
-                   LoginAPIView, LogoutAPIView)
+                   LoginAPIView, LogoutAPIView, AdminItemLisAPIVIew)
 
 app_name = 'frontend'
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path('brand/', BrandListAPIView.as_view(), name='brand'),
     path('login/', LoginAPIView.as_view(), name='login'),
     path('logout/', LogoutAPIView.as_view(), name='logout'),
+    path('adminmenu/', AdminItemLisAPIVIew.as_view(), name="adminmenu"),
 ]

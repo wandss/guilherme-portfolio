@@ -1,16 +1,36 @@
 <template>
+    <ModalConfirm @close="show=false" @getUserResponse="logout($event)"
+     :show="show" :message="message"
+    />
+
 </template>
 <script>
+import ModalConfirm from '@/components/ModalConfirm';
+
 export  default{
     name:'logout',
-    mounted(){
-        if(this.$cookies.get('csrftoken').length>0){
-            console.log('Trigger a logout, then redirects')
-            this.$http.get(this.$resource.logout)
-                .then(resp=>console.log(resp.data))
-                .catch(error=>console.log(error.response))
-            this.$router.push('/')
+    components:{ModalConfirm},
+    data(){
+        return{
+            show:true,
+            message:'Tem certeza que deseja sair?'
         }
+    },
+    mounted(){
+        this.show=true;
+    },
+    methods:{
+        logout(choice){
+            if(choice){
+                if(this.$cookies.get('csrftoken').length>0){
+                    this.$http.get(this.$resource.logout)
+                        .then(resp=>console.log(resp.data))
+                        .catch(error=>console.log(error.response))
+                    this.$router.push('/')
+                }
+            }
+            this.show=false;
+        },
     }
 
 }

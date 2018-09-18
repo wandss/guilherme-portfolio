@@ -1,12 +1,12 @@
 <template>
     <div class="container">
+        <Alert :showAlert="showAlert" :cssClass="alertCss" @close="showAlert=false">
+            <h4>{{message}}</h4>
+        </Alert>
+        <div v-if='!isLoggedIn'>
+            <login @getLogin="handleLogin" @closeAlert="showAlert=false"/>
+        </div>
         <div class="row">
-            <Alert :showAlert="showAlert" :cssClass="alertCss" @close="showAlert=false">
-                <h4>{{message}}</h4>
-            </Alert>
-            <div v-if='!isLoggedIn'>
-                <login @getLogin="handleLogin" @closeAlert="showAlert=false"/>
-            </div>
             <PhotoCard v-for="album in albums" :key="album.uuid">
                 <div slot="name" id="albumName">
                     <h5> {{album.name}} </h5>

@@ -1,3 +1,6 @@
+<!--TODO REVIEW THIS COMPONENT
+ALERT IS NOT BEEN USED. DISPLAY MESSAGES WITHIN ALERT
+-->
 <template>
     <form @submit.prevent="createFile($event)">
         <Modal modalSize="modal-md" :hasFooter="true" title="Adicionar Foto"

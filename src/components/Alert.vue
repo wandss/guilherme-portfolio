@@ -1,12 +1,16 @@
 <template>
-    <transition name="fade">
-        <div :class="['alert', 'alert-'+cssClass,]" v-show="showAlert">
-            <a v-if="hasCloseButton" class="close" @click="$emit('close')">
-                &times;
-            </a>
-            <slot></slot>
+    <div class="row">
+        <div class="col">
+            <transition name="fade">
+                <div :class="['alert', 'alert-'+cssClass,]" v-show="showAlert">
+                    <a v-if="hasCloseButton" class="close" @click="$emit('close')">
+                        &times;
+                    </a>
+                    <slot></slot>
+                </div>
+            </transition>
         </div>
-    </transition>
+    </div>
 </template>
 <script>
     export default{
@@ -38,10 +42,10 @@
     box-shadow:-1px 3px 8px 1px #111;
 }
 .fade-enter-active, .fade-leave-active{
-    transition:all .5s ease-in-out;
+    transition:all .5s ease;
 }
 .fade-enter, .fade-leave-to{
-    transform:translate(-50rem);
+    transform:translateY(-1rem);
     opacity:0;
 }
 </style>

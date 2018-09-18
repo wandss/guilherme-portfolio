@@ -2,11 +2,12 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import (NavbarItemSerializer, BrandSerializer)
-from .models import NavbarItem, Brand
+from .serializers import (NavbarItemSerializer, BrandSerializer,
+                          AdminItemSerializer)
+from .models import NavbarItem, Brand, AdminItem
 
 
 def home(request):
@@ -44,3 +45,9 @@ class LogoutAPIView(APIView):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+class AdminItemLisAPIVIew(ListAPIView):
+
+    permission_classes = (IsAdminUser, )
+    serializer_class = AdminItemSerializer
+    queryset = AdminItem.objects.all()
