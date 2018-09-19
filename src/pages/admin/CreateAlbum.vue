@@ -42,8 +42,27 @@
                                 Criar imagem de Capa
                             </button>
                         </div>
-                        <gallery v-else :title="selectionType" :images="images"
-                         @click="selectedImage($event)" />
+
+                        <div class="row mt-5" v-else>
+                            <div class="col" >
+                                <button type="button" v-if="prevImages!==null"
+                                 @click="getImages(prevImages)"      
+                                 class="btn btn btn-outline-primary">
+                                    <i class="fa fa-chevron-left"></i>
+                                </button>
+                            </div>
+                            <div class="col-10">
+                                <gallery  :title="selectionType" :images="images"
+                                 @click="selectedImage($event)" />
+                            </div>
+                            <div class="col">
+                                <button type="button" v-if="nextImages!==null" 
+                                 @click="getImages(nextImages)"
+                                 class="float-right btn btn-outline-primary align-middle">
+                                    <i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -88,35 +107,40 @@ export default{
             hasInstructions:false,
             success:false,
             uploadForm:false,
+            prevImages:null,
+            nextImages:null,
         }
     },
     mounted(){
-        this.getThumbnails()
+        this.getImages(this.$resource.thumbnails)
     },
     methods:{
-        getThumbnails(){
-            this.$http.get(this.$resource.thumbnails)
+        getImages(url){
+            this.$http.get(url)
                 .then(resp=>{
+                    let previous = null;
+                    let next = null;
+
                     this.images=resp.data.results;
+                    if(resp.data.previous!==null){
+                        previous = url+'/?'+
+                            resp.data.previous.split('?')[1]
+                    }
+                    if(resp.data.next!==null){
+                        next = url+'/?'+
+                            resp.data.next.split('?')[1]
+                    }
+                    this.prevImages = previous;
+                    this.nextImages = next;
                     this.uploadForm=resp.data.length===0;
                 })
                 .catch(error=>console.log(error.response))
-        },
-        getAllImages(){
-            this.$http.get(this.$resource.images)
-                .then(resp=>{
-                    this.images=resp.data.results
-                })
-                .catch(error=>{
-                    console.log(error.response)
-                })
-
         },
         selectedImage(image){
             if(this.thumbnail===null){
                 this.thumbnail = image[0]
                 this.hasInstructions=true
-                this.getAllImages()
+                this.getImages(this.$resource.images)
             }
             this.albumPictures=image;
         },
@@ -135,12 +159,15 @@ export default{
                     this.message="Album Incluído com Sucesso";
                     this.hasInstructions=true;
                     this.success=true;
-                    this.getThumbnails();
+                    this.getImages(this.$resource.thumbnails);
                     this.thumbnail=null;
                     this.albumPictures=[];
 
                 })
                 .catch(error=>console.log(error.response))
+        },
+        close(){
+            this.$emit('close')
         }
     },
     computed:{
