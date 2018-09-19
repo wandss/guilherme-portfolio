@@ -1,10 +1,9 @@
 <template>
     <form @submit.prevent="createAlbum">
-
         <modal :show="show" modalSize="modal-full" title="Criar Album"
          @click="$emit('close')" >
             <div slot="body">
-                <modal title="Instruções" :show="hasInstructions" 
+                <modal title="Instruções" :show="hasInstructions"
                  @click="hasInstructions=false">
                     <div slot="body">
                         <div v-if="success">
@@ -18,7 +17,7 @@
                 </modal>
                 <upload-form :show="uploadForm=uploadForm"
                   @close="uploadForm=false"
-                  @getNewImage="images.push($event)"           
+                  @getNewImage="images.push($event)"
                 />
                 <div class="row">
                     <div class="col">
@@ -36,8 +35,8 @@
                              :hasCloseButton='false'>
                                 Não existem fotos disponíves para capa.
                             </Alert>
-                            <button 
-                             type="button" @click="uploadForm=true" 
+                            <button
+                             type="button" @click="uploadForm=true"
                              class="btn btn-outline-warning btn-block">
                                 <span class="fa fa-plus-square"></span>
                                 Criar imagem de Capa
@@ -50,10 +49,10 @@
                 </div>
             </div>
             <div slot="footer">
-                <button class="btn btn-outline-primary">
+                <button class="btn btn-outline-primary mx-2">
                     Criar Album
                 </button>
-                <button class="btn btn-outline-danger" type="button"
+                <button class="btn btn-outline-danger mx-2" type="button"
                  @click="$emit('close')">
                     Cancelar
                 </button>

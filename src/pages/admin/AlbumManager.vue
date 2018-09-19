@@ -1,16 +1,14 @@
 <template>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col">
-                <div class="btn-group">
-                    <button class="btn btn-info">
-                        <span class="fa fa-eye"> </span>
-                        Ver Albums</button>
-                    <button class="btn btn-info" @click="createAlbum=true">
-                        <span class="fa fa-plus-square"> </span>
-                         Criar Album
-                    </button>
-                </div>
+                <button class="btn btn-outline-info mx-2">
+                    <span class="fa fa-eye"> </span>
+                    Ver Albums</button>
+                <button class="btn btn-outline-info mx-2" @click="createAlbum=true">
+                    <span class="fa fa-plus-square"> </span>
+                     Criar Album
+                </button>
             </div>
         </div>
         <create-album :show="createAlbum" @close="createAlbum=false"/>

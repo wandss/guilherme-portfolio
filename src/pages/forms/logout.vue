@@ -29,6 +29,7 @@ export  default{
                     this.$router.push('/')
                 }
             }
+            else{this.$router.go(-1);}
             this.show=false;
         },
     }

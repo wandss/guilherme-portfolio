@@ -5,11 +5,11 @@
             <h5>{{message}}</h5>
         </div>
         <div slot="footer">
-            <button class="btn btn-outline-success"
+            <button class="btn btn-outline-success mx-2"
              @click="$emit('getUserResponse', true)">
                 Sim
             </button>
-            <button class="btn btn-outline-danger"
+            <button class="btn btn-outline-danger mx-2"
              @click="$emit('getUserResponse', false)">
                 Não
             </button>

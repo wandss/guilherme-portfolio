@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="row">
-            <PhotoCard v-for="album in albums.results" :key="album.uuid"
+        <div class="row mb-5">
+            <PhotoCard v-for="album in albums" :key="album.uuid"
              @click="albumDetail(album.uuid)">
                 <div slot="name" id="albumName">
                     <h5>{{album.name}}</h5>
@@ -17,9 +17,14 @@
                 </div>
             </PhotoCard>
         </div>
-        <div class="row">
+        <div class="row mb-5">
             <div class="col">
-                Pagination Area
+                <button v-if="nextAlbums!==null" type="button"
+                 @click="getAlbums(nextAlbums)"
+                 class="btn btn-block btn-outline-success"
+                 >
+                    Mais Albums ...
+                </button>
             </div>
         </div>
     </div>
@@ -30,46 +35,31 @@ export default{
     data(){
         return{
             albums:[],
-            bottom:false,
+            nextAlbums:null,
         }
     },
     methods:{
         getAlbums(url){
             this.$http.get(url)
                 .then(resp=>{
-                    this.albums=resp.data;
+                    let nextAlbums = null;
+                    resp.data.results.forEach(album=>
+                        this.albums.push(album));
+                    if(resp.data.next !== null){
+                        nextAlbums = this.$resource.publicAlbums+'/?'+
+                            resp.data.next.split('?')[1];
+                    }
+                    this.nextAlbums = nextAlbums;
                 })
                 .catch(error=>console.log(error.response))
         },
         albumDetail(uuid){
             this.$router.push('/album'+uuid)
         },
-        getBottom(){
-            const scrollY = window.scrollY
-            const visible = document.documentElement.clientHeight
-            const pageHeight = document.documentElement.scrollHeight
-            //srollY+visible=pageHeight
-            //console.log(scrollY + visible === pageHeight);
-            return scrollY + visible === pageHeight;
-        }
     },
     mounted(){
-        this.getAlbums(this.$resource.publicAlbums);
+        this.getAlbums(this.$resource.publicAlbums+'/?q=True');
     },
-    created(){
-        window.addEventListener('scroll', ()=>{
-            this.bottom = this.getBottom()
-        })
-    },
-    watch:{
-        bottom(bottom){
-            if(bottom){
-                const url = this.$resource.publicAlbums.split('?')[0]+'?'+
-                    this.albums.next.split('?')[1]
-                this.getAlbums(url)
-            }
-        }
-    }
 }
 </script>
 <style>

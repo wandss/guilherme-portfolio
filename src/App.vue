@@ -3,7 +3,7 @@
       <NavBar />
       <div class="row">
           <div class="col">
-              <Brand v-for="info in brandInfo" :key="info.title"
+              <Brand v-for="info in brandInfo.results" :key="info.title"
                :title="info.title" :subtitle="info.subtitle"/>
           </div>
       </div>
@@ -28,7 +28,7 @@ export default {
     methods:{
         getBrandInfo(){
             this.$http.get(this.$resource.brand)
-                .then(resp=>this.brandInfo=resp.data.results)
+                .then(resp=>this.brandInfo=resp.data)
         }
     },
     beforeUpdate(){
