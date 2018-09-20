@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="createAlbum">
         <modal :show="show" modalSize="modal-full" title="Criar Album"
-         @click="$emit('close')" >
+         @click="close" >
             <div slot="body">
                 <modal title="Instruções" :show="hasInstructions"
                  @click="hasInstructions=false">
@@ -35,8 +35,7 @@
                              :hasCloseButton='false'>
                                 Não existem fotos disponíves para capa.
                             </Alert>
-                            <button
-                             type="button" @click="uploadForm=true"
+                            <button type="button" @click="uploadForm=true"
                              class="btn btn-outline-warning btn-block">
                                 <span class="fa fa-plus-square"></span>
                                 Criar imagem de Capa
@@ -72,7 +71,7 @@
                     Criar Album
                 </button>
                 <button class="btn btn-outline-danger mx-2" type="button"
-                 @click="$emit('close')">
+                 @click="close">
                     Cancelar
                 </button>
             </div>
@@ -97,6 +96,7 @@ export default{
     },
     data(){
         return{
+            initialData:null,
             name:null,
             description:null,
             publish:{label:'Publicar',checked:false},
@@ -111,7 +111,10 @@ export default{
             nextImages:null,
         }
     },
+    created(){
+    },
     mounted(){
+        this.setInitialData();
         this.getImages(this.$resource.thumbnails)
     },
     methods:{
@@ -162,13 +165,28 @@ export default{
                     this.getImages(this.$resource.thumbnails);
                     this.thumbnail=null;
                     this.albumPictures=[];
-
+                    this.resetData()
                 })
                 .catch(error=>console.log(error.response))
         },
+        setInitialData(){
+            let initialData = {}
+            Object.keys(this.$data).forEach(key=>{
+                if(key !== 'initialData' && key !== 'images'){
+                    initialData[key] = this.$data[key]
+                }
+            })
+            this.initialData = initialData
+        },
         close(){
+            this.resetData()
             this.$emit('close')
-        }
+        },
+        resetData(){
+            Object.keys(this.initialData).forEach(key=>
+                this.$data[key] = this.initialData[key]
+            )
+        },
     },
     computed:{
         selectionType(){

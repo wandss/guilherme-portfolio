@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.contrib.auth.models import Group
 from rest_framework.generics import (ListAPIView, CreateAPIView,
                                      ListCreateAPIView, RetrieveAPIView)
 from rest_framework.views import APIView
@@ -68,6 +69,10 @@ class PhotoAlbumCreateAPIView(CreateAPIView):
     def post(self, request, *args, **kwargs):
         """Gets images's ids if uuid's has been passed from client application
         """
+
+        if not request.data.get('public') and request.date.get('name'):
+            Group.objects.create(name=request.data.get('name'))
+
         try:
             request.data['images'] = [
                     Image.objects.get(uuid=uuid).id
