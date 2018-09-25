@@ -4,7 +4,7 @@
          @click="close" >
             <div slot="body">
                 <modal title="Instruções" :show="hasInstructions"
-                 @click="hasInstructions=false">
+                 @click="dismiss">
                     <div slot="body">
                         <div v-if="success">
                             <h4>{{message}}</h4>
@@ -45,7 +45,7 @@
                         <div class="row mt-5" v-else>
                             <div class="col" >
                                 <button type="button" v-if="prevImages!==null"
-                                 @click="getImages(prevImages)"      
+                                 @click="getImages(prevImages)"
                                  class="btn btn btn-outline-primary">
                                     <i class="fa fa-chevron-left"></i>
                                 </button>
@@ -55,7 +55,7 @@
                                  @click="selectedImage($event)" />
                             </div>
                             <div class="col">
-                                <button type="button" v-if="nextImages!==null" 
+                                <button type="button" v-if="nextImages!==null"
                                  @click="getImages(nextImages)"
                                  class="float-right btn btn-outline-primary align-middle">
                                     <i class="fa fa-chevron-right"></i>
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div slot="footer">
-                <button class="btn btn-outline-primary mx-2">
+                <button class="btn btn-outline-primary mx-2" :disabled="thumbnail===null">
                     Criar Album
                 </button>
                 <button class="btn btn-outline-danger mx-2" type="button"
@@ -110,8 +110,6 @@ export default{
             prevImages:null,
             nextImages:null,
         }
-    },
-    created(){
     },
     mounted(){
         this.setInitialData();
@@ -159,15 +157,18 @@ export default{
             this.$http.post(this.$resource.createAlbum, data, {headers:headers})
                 .then(resp=>{
                     e.target.reset();
+                    this.resetData();
                     this.message="Album Incluído com Sucesso";
                     this.hasInstructions=true;
                     this.success=true;
                     this.getImages(this.$resource.thumbnails);
-                    this.thumbnail=null;
-                    this.albumPictures=[];
-                    this.resetData()
+                    this.albumPicture = [];
+                    //this.thumbnail=null;
+                    //this.albumPictures=[];
                 })
-                .catch(error=>console.log(error.response))
+                .catch(error=>{
+                    console.log(error.response)
+                })
         },
         setInitialData(){
             let initialData = {}
@@ -179,7 +180,7 @@ export default{
             this.initialData = initialData
         },
         close(){
-            this.resetData()
+            this.resetData();
             this.$emit('close')
         },
         resetData(){
@@ -187,6 +188,11 @@ export default{
                 this.$data[key] = this.initialData[key]
             )
         },
+        dismiss(){
+            this.hasInstructions=false;
+            this.success = false;
+            this.message = null;
+        }
     },
     computed:{
         selectionType(){
