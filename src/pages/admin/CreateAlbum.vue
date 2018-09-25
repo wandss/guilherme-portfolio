@@ -23,7 +23,7 @@
                     <div class="col">
                         <app-input type="text" required label="Nome do Album:"
                          v-model="name" placeholder="Nome do Album"/>
-                        <app-input type="text" required label="Descição:"
+                        <app-input type="text" required label="Descrição:"
                          v-model="description" placeholder="Descrição"/>
                         <app-checkbox v-model="publish.checked"
                          :label="publish.label" />

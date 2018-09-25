@@ -70,7 +70,7 @@ class PhotoAlbumCreateAPIView(CreateAPIView):
         """Gets images's ids if uuid's has been passed from client application
         """
 
-        if not request.data.get('public') and request.date.get('name'):
+        if not request.data.get('public') and request.data.get('name'):
             Group.objects.create(name=request.data.get('name'))
 
         try:
