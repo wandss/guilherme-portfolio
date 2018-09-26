@@ -3,9 +3,10 @@
         <div class="row">
             <div class="col">
                 <h4>{{title}}</h4>
-                <img v-if="images.length>0" v-for="image in images" @click="selectImage(image)"
+                <img v-if="images.length>0" v-for="image in images" 
+                  @click="$emit('click', image)"
                  :key="image.uuid" width="240" height="180"
-                 :class="{'selectedImage':isSelected(image.uuid)}"
+                 :class="{'selectedImage':image.selected}"
                  :src="image.image_url" :alt="image.name" :title="image.name"
                  />
             </div>
@@ -27,22 +28,8 @@ export default{
     },
     data(){
         return{
-            selectedImages:[],
+            selectedImage:null,
         }
-    },
-    methods:{
-        selectImage(image){
-            const index = this.selectedImages.map(img=>
-                img.uuid).indexOf(image.uuid)
-            index===-1?this.selectedImages.push(image):
-                this.selectedImages.splice(index,1)
-            this.$emit('click', this.selectedImages)
-        },
-        isSelected(uuid){
-            return this.selectedImages.filter(image=>
-                image.uuid===uuid).length!==0
-        }
-
     },
 }
 </script>

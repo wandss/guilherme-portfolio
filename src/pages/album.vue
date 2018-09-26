@@ -17,7 +17,7 @@
         </div>
         <div class="container-fluid" id="btn">
             <button class="btn btn-primary"
-             @click="$router.push('/')">Voltar
+             @click="$router.go(-1)">Voltar
             </button>
         </div>
     </div>

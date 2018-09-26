@@ -138,17 +138,35 @@ export default{
                 .catch(error=>console.log(error.response))
         },
         selectedImage(image){
+            const index = this.albumPictures.map(image=>
+                image.uuid).indexOf(image.uuid)
             if(this.thumbnail===null){
-                this.thumbnail = image[0]
+                this.thumbnail = image
                 this.hasInstructions=true
                 this.getImages(this.$resource.images)
             }
-            this.albumPictures=image;
+            else{
+                this.images.forEach(images=>{
+                    if(index === -1){
+                        if(images.uuid === image.uuid){
+                            this.$set(images,'selected','true')
+                        }
+                        this.albumPictures.push(image);
+                    }
+                    else{ 
+                        this.albumPictures.splice(index, 1)
+                        if(images.uuid === image.uuid){
+                            this.$delete(images,'selected')
+                        }
+                    }
+                })
+            }
         },
         createAlbum(e){
             const data = {name:this.name, description:this.description,
                 published:this.publish.checked, public:this.public.checked,
-                thumbnail:this.thumbnail.uuid, images:this.albumPictures.map(image=>image.uuid),
+                thumbnail:this.thumbnail.uuid, images:this.albumPictures.map(
+                image=>image.uuid),
             }
 
             const csrfToken = this.$cookies.get('csrftoken')
@@ -162,9 +180,8 @@ export default{
                     this.hasInstructions=true;
                     this.success=true;
                     this.getImages(this.$resource.thumbnails);
-                    this.albumPicture = [];
-                    //this.thumbnail=null;
-                    //this.albumPictures=[];
+                    this.thumbnail=null;
+                    this.albumPictures=[];
                 })
                 .catch(error=>{
                     console.log(error.response)
@@ -180,6 +197,8 @@ export default{
             this.initialData = initialData
         },
         close(){
+            this.albumPictures = [];
+            this.thumbnail = null;
             this.resetData();
             this.$emit('close')
         },
