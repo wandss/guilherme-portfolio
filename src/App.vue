@@ -1,3 +1,17 @@
+<!--TODO
+   Fix CreateAlbum: Show messages when from backend errors
+   Screens to update/delete Images and Albums
+   Views Counter
+   Improve main Menu (Hide Login/Logou)
+   Small screen Menu
+   Client Administration
+   Loaders
+   Fix Image Size for big screen (max width)
+   Reduce Number size at photo viewer
+   Assotiate groups for clients
+   Format dates to use pattern "Month Name/Year" in both home and Client
+
+-->
 <template>
   <div class="container-fluid">
       <NavBar />

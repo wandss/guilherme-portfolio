@@ -1,18 +1,13 @@
 <template>
     <form @submit.prevent="createAlbum">
-        <modal :show="show" modalSize="modal-full" title="Criar Album"
+        <component :is='show?newAlbum:null' :show="show" modalSize="modal-full" title="Criar Album"
          @click="close" >
             <div slot="body">
                 <modal title="Instruções" :show="hasInstructions"
                  @click="dismiss">
                     <div slot="body">
-                        <div v-if="success">
-                            <h4>{{message}}</h4>
-                        </div>
-                        <div v-else>
-                            <h5>Foto de Capa escolhida. </h5>
-                            <h6>Ecolha agora as imagens que farão parte do álbum.</h6>
-                        </div>
+                        <h5>{{message}}</h5>
+                        <h6>{{complementaryText}}</h6>
                     </div>
                 </modal>
                 <upload-form :show="uploadForm=uploadForm"
@@ -27,8 +22,8 @@
                          v-model="description" placeholder="Descrição"/>
                         <app-checkbox v-model="publish.checked"
                          :label="publish.label" />
-                        <app-checkbox v-model="public.checked"
-                         :label="public.label" />
+                        <app-checkbox v-model="publicAlbum.checked"
+                         :label="publicAlbum.label" />
 
                         <div v-if="images.length===0" >
                             <Alert :showAlert="true" cssClass="warning"
@@ -75,7 +70,7 @@
                     Cancelar
                 </button>
             </div>
-        </modal>
+        </component>
     </form>
 </template>
 <script>
@@ -96,11 +91,13 @@ export default{
     },
     data(){
         return{
-            initialData:null,
+            newAlbum:'Modal',
             name:null,
             description:null,
             publish:{label:'Publicar',checked:false},
-            public:{label:'Público',checked:false},
+            publicAlbum:{label:'Público',checked:false},
+            message:'',
+            complementaryText:'',
             images:[],
             thumbnail:null,
             albumPictures:[],
@@ -112,7 +109,6 @@ export default{
         }
     },
     mounted(){
-        this.setInitialData();
         this.getImages(this.$resource.thumbnails)
     },
     methods:{
@@ -142,7 +138,9 @@ export default{
                 image.uuid).indexOf(image.uuid)
             if(this.thumbnail===null){
                 this.thumbnail = image
-                this.hasInstructions=true
+                this.hasInstructions = true
+                this.message = "Imagem de Capa Selecionada";
+                this.complementaryText = "Adicione agora as imagens do album";
                 this.getImages(this.$resource.images)
             }
             else{
@@ -153,7 +151,7 @@ export default{
                         }
                         this.albumPictures.push(image);
                     }
-                    else{ 
+                    else{
                         this.albumPictures.splice(index, 1)
                         if(images.uuid === image.uuid){
                             this.$delete(images,'selected')
@@ -164,7 +162,7 @@ export default{
         },
         createAlbum(e){
             const data = {name:this.name, description:this.description,
-                published:this.publish.checked, public:this.public.checked,
+                published:this.publish.checked, public:this.publicAlbum.checked,
                 thumbnail:this.thumbnail.uuid, images:this.albumPictures.map(
                 image=>image.uuid),
             }
@@ -175,7 +173,7 @@ export default{
             this.$http.post(this.$resource.createAlbum, data, {headers:headers})
                 .then(resp=>{
                     e.target.reset();
-                    this.resetData();
+                    //Needs to use resp.data to update albums??
                     this.message="Album Incluído com Sucesso";
                     this.hasInstructions=true;
                     this.success=true;
@@ -184,33 +182,41 @@ export default{
                     this.albumPictures=[];
                 })
                 .catch(error=>{
-                    console.log(error.response)
+                    this.hasInstructions = true;
+                    this.message ="O Album não foi salvo!"
+                    if(error.response.status === 500){
+                        this.complementaryText = "O nome do Álbum deve ser único."
+                    }
+                    if(this.albumPictures.length === 0){
+                        this.complementaryText = "Apenas a imagem de capa foi adicionada ao album!"
+
+                    }
                 })
         },
-        setInitialData(){
-            let initialData = {}
-            Object.keys(this.$data).forEach(key=>{
-                if(key !== 'initialData' && key !== 'images'){
-                    initialData[key] = this.$data[key]
-                }
-            })
-            this.initialData = initialData
-        },
         close(){
-            this.albumPictures = [];
+            this.name = null;
+            this.description = null;
+            this.publish = {label:'Publicar',checked:false};
+            this.publicAlbum = {label:'Público',checked:false};
+            this.images = [];
             this.thumbnail = null;
-            this.resetData();
-            this.$emit('close')
-        },
-        resetData(){
-            Object.keys(this.initialData).forEach(key=>
-                this.$data[key] = this.initialData[key]
-            )
+            this.albumPictures = [];
+            this.hasInstructions = false;
+            this.success = false;
+            this.uploadForm = false;
+            this.prevImages = null;
+            this.nextImages = null;
+            this.message = '';
+            this.complementaryText = '';
+            this.$emit('close');
+
+            this.getImages(this.$resource.thumbnails)
         },
         dismiss(){
             this.hasInstructions=false;
             this.success = false;
-            this.message = null;
+            this.message = '';
+            this.complementaryText = '';
         }
     },
     computed:{

@@ -5,9 +5,7 @@
              @click="albumDetail(album.uuid)">
                 <div slot="name" id="albumName">
                     <h5>{{album.name}}</h5>
-                    <p>
-                        Junho /2018
-                    </p>
+                    <p>{{new Date(album.create_date).toLocaleString()}}</p>
                 </div>
                 <img :src="album.thumbnail_data.src" slot="img"
                  width="280" height="200"

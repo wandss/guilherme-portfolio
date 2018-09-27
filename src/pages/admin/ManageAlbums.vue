@@ -17,7 +17,7 @@
 <script>
 import CreateAlbum from '@/pages/admin/CreateAlbum';
 export default{
-    name:'AlbumManager',
+    name:'ManageAlbums',
     components:{CreateAlbum,},
     data(){
         return{

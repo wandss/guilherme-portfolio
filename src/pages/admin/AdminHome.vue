@@ -7,11 +7,11 @@ Some errors may return like : {detail:['message'] => add this to an Alert?
 <template>
     <div class="container-fluid">
         <div class="container">
-            <Alert :showAlert="alert.show" :cssClass="alert.cssClass"
-             @close="alert.show=false">
-                <h4>{{alert.message}}</h4>
-            </Alert>
-            <div v-if='!isLoggedIn'>
+            <div v-show='!isLoggedIn'>
+                <Alert :showAlert="alert.show" :cssClass="alert.cssClass"
+                 @close="alert.show=false">
+                    <h4>{{alert.message}}</h4>
+                </Alert>
                 <login @getLogin="handleLogin" @closeAlert="showAlert=false"/>
             </div>
         </div>
@@ -27,7 +27,7 @@ Some errors may return like : {detail:['message'] => add this to an Alert?
 <script>
 import Login from '@/pages/forms/login';
 export default{
-    name:'ManageAlbums',
+    name:'AdminHome',
     components:{Login},
     data(){
         return{
